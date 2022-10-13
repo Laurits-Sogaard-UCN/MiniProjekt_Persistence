@@ -23,8 +23,9 @@ import javax.swing.JTextArea;
 
 public class GUI extends JFrame {
 
+	private SaleOrderController saleOrderCtr;
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField textFieldCustomerNum;
 	private CardLayout cardLayout;
 
 	/**
@@ -162,13 +163,13 @@ public class GUI extends JFrame {
 		gbc_lblCustomerNumber.gridy = 0;
 		panel_6.add(lblCustomerNumber, gbc_lblCustomerNumber);
 		
-		textField = new JTextField();
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 0;
-		gbc_textField.gridy = 1;
-		panel_6.add(textField, gbc_textField);
-		textField.setColumns(10);
+		textFieldCustomerNum = new JTextField();
+		GridBagConstraints gbc_textFieldCustomerNum = new GridBagConstraints();
+		gbc_textFieldCustomerNum.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldCustomerNum.gridx = 0;
+		gbc_textFieldCustomerNum.gridy = 1;
+		panel_6.add(textFieldCustomerNum, gbc_textFieldCustomerNum);
+		textFieldCustomerNum.setColumns(10);
 		
 		JPanel panel_5 = new JPanel();
 		panelSaleOrder.add(panel_5, BorderLayout.CENTER);
@@ -210,8 +211,10 @@ public class GUI extends JFrame {
 		cardLayout.next(contentPane);
 	}
 	
-	private void createOrder() {
-		
+	private void createSaleOrder() {
+		String customerNumberText = textFieldCustomerNum.getText();
+		int customerNumber = Integer.parseInt(customerNumberText);
+		saleOrderCtr.createSaleOrder(customerNumber);
 	}
 }
 
