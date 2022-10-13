@@ -28,6 +28,7 @@ public class SaleOrderDB implements SaleOrderDBIF {
 		}
 	}
 	
+	@Override
 	public SaleOrder createSaleOrder(String phone) throws DataAccessException {
 		SaleOrder saleOrder = new SaleOrder();
 		try {

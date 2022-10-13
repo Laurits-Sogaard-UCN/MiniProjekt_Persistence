@@ -1,26 +1,26 @@
 package model;
 
 public class Customer extends Person {
-	
-	private int freeShipping;
 
 	/**
-	 * @param name
+	 * @param fname
+	 * @param lname
 	 * @param address
 	 * @param zipcode
 	 * @param city
 	 * @param phone
 	 * @param email
-	 * @param freeShipping
 	 */
-	public Customer(String name, String address, int zipcode, String city, String phone, String email,
-			int freeShipping) {
-		super(name, address, zipcode, city, phone, email);
-		this.freeShipping = freeShipping;
+	public Customer(String fname, String lname, String address, int zipcode, String city, String phone, String email) {
+		super(fname, lname, address, zipcode, city, phone, email);
 	}
 
 	public Customer(String phone) {
-		super("", "", 0, "", phone, null);
+		super(null, null, null, 0, null, phone, null);
+	}
+	
+	public Customer() {
+		super(null, null, null, 0, null, null, null);
 	}
 
 	

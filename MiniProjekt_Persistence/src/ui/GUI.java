@@ -6,6 +6,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.SaleOrderController;
+import model.SaleOrder;
+import utility.DataAccessException;
+
 import java.awt.CardLayout;
 import java.awt.Container;
 
@@ -25,8 +30,9 @@ public class GUI extends JFrame {
 
 	private SaleOrderController saleOrderCtr;
 	private JPanel contentPane;
-	private JTextField textFieldCustomerNum;
+	private JTextField textFieldPhone;
 	private CardLayout cardLayout;
+	private JTextArea textArea;
 
 	/**
 	 * Launch the application.
@@ -141,7 +147,11 @@ public class GUI extends JFrame {
 		JButton btnNext = new JButton("Next");
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				createOrder();
+				try {
+					createSaleOrder();
+				} catch (DataAccessException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		panel_4.add(btnNext);
@@ -155,21 +165,21 @@ public class GUI extends JFrame {
 		gbl_panel_6.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 		panel_6.setLayout(gbl_panel_6);
 		
-		JLabel lblCustomerNumber = new JLabel("Customer number:");
-		GridBagConstraints gbc_lblCustomerNumber = new GridBagConstraints();
-		gbc_lblCustomerNumber.anchor = GridBagConstraints.WEST;
-		gbc_lblCustomerNumber.insets = new Insets(0, 0, 5, 0);
-		gbc_lblCustomerNumber.gridx = 0;
-		gbc_lblCustomerNumber.gridy = 0;
-		panel_6.add(lblCustomerNumber, gbc_lblCustomerNumber);
+		JLabel lblCustomerPhone = new JLabel("Customer phone:");
+		GridBagConstraints gbc_lblCustomerPhone = new GridBagConstraints();
+		gbc_lblCustomerPhone.anchor = GridBagConstraints.WEST;
+		gbc_lblCustomerPhone.insets = new Insets(0, 0, 5, 0);
+		gbc_lblCustomerPhone.gridx = 0;
+		gbc_lblCustomerPhone.gridy = 0;
+		panel_6.add(lblCustomerPhone, gbc_lblCustomerPhone);
 		
-		textFieldCustomerNum = new JTextField();
-		GridBagConstraints gbc_textFieldCustomerNum = new GridBagConstraints();
-		gbc_textFieldCustomerNum.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldCustomerNum.gridx = 0;
-		gbc_textFieldCustomerNum.gridy = 1;
-		panel_6.add(textFieldCustomerNum, gbc_textFieldCustomerNum);
-		textFieldCustomerNum.setColumns(10);
+		textFieldPhone = new JTextField();
+		GridBagConstraints gbc_textFieldPhone = new GridBagConstraints();
+		gbc_textFieldPhone.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldPhone.gridx = 0;
+		gbc_textFieldPhone.gridy = 1;
+		panel_6.add(textFieldPhone, gbc_textFieldPhone);
+		textFieldPhone.setColumns(10);
 		
 		JPanel panel_5 = new JPanel();
 		panelSaleOrder.add(panel_5, BorderLayout.CENTER);
@@ -188,7 +198,7 @@ public class GUI extends JFrame {
 		gbc_lblNewLabel.gridy = 0;
 		panel_5.add(lblNewLabel, gbc_lblNewLabel);
 		
-		JTextArea textArea = new JTextArea();
+		textArea = new JTextArea();
 		GridBagConstraints gbc_textArea = new GridBagConstraints();
 		gbc_textArea.fill = GridBagConstraints.BOTH;
 		gbc_textArea.gridx = 0;
@@ -211,10 +221,9 @@ public class GUI extends JFrame {
 		cardLayout.next(contentPane);
 	}
 	
-	private void createSaleOrder() {
-		String customerNumberText = textFieldCustomerNum.getText();
-		int customerNumber = Integer.parseInt(customerNumberText);
-		saleOrderCtr.createSaleOrder(customerNumber);
+	private void createSaleOrder() throws DataAccessException {
+		String phone = textFieldPhone.getText();
+		SaleOrder saleOrder = saleOrderCtr.createSaleOrder(phone);
 	}
 }
 
