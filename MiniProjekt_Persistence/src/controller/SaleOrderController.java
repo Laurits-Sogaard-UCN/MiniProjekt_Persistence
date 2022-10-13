@@ -14,11 +14,21 @@ public class SaleOrderController {
 	private ProductController productCtr;
 	private SaleOrder saleOrder;
 	
+	/**
+	 * Constructor to initialize instance variables.
+	 * @throws DataAccessException
+	 */
 	public SaleOrderController() throws DataAccessException {
 		saleOrderDB = new SaleOrderDB();
 		personCtr = new PersonController();
 	}
 	
+	/**
+	 * Create SaleOrder object containing a Customer and Employee object.
+	 * @param phone
+	 * @return SaleOrder
+	 * @throws DataAccessException
+	 */
 	public SaleOrder createSaleOrder(String phone) throws DataAccessException {
 		this.saleOrder = saleOrderDB.createSaleOrder(phone);
 		Employee employee = personCtr.findCurrentEmployee();

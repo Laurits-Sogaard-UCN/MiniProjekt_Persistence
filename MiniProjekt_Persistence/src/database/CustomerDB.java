@@ -15,23 +15,31 @@ public class CustomerDB implements CustomerDBIF {
 	private static final String FIND_CUSTOMER_BY_PHONE = ("");
 	private PreparedStatement findCustomerByPhone;
 	
-	private static final String FIND_ADDRESS_BY_ID = ("");
-	private PreparedStatement findAddressById;
-	
+	/**
+	 * Constructor to initialize instance variables.
+	 * @throws DataAccessException
+	 */
 	public CustomerDB() throws DataAccessException {
 		init();
 	}
 	
+	/**
+	 * Initialization of Connection and PreparedStatments.
+	 * @throws DataAccessException
+	 */
 	private void init() throws DataAccessException {
 		Connection con = DBConnection.getInstance().getConnection();
 		try {
 			findCustomerByPhone = con.prepareStatement(FIND_CUSTOMER_BY_PHONE);
-			findAddressById = con.prepareStatement(FIND_ADDRESS_BY_ID);
 		} catch(SQLException e) {
 			throw new DataAccessException("Could not prepare statement", e);
 		}
 	}
 	
+	/**
+	 * Finds Customer by phone by executing query and building either a
+	 * PrivateCustomer or BusinessCustomer object (done by internal method call).
+	 */
 	@Override
 	public Customer findCustomerByPhone(String phone) throws DataAccessException {
 		Customer customer = new Customer();
@@ -50,6 +58,12 @@ public class CustomerDB implements CustomerDBIF {
 		return customer;
 	}
 	
+	/**
+	 * Builds a PrivateCustomer object from ResultSet.
+	 * @param rs
+	 * @return Customer
+	 * @throws DataAccessException
+	 */
 	public Customer buildPrivateObject(ResultSet rs) throws DataAccessException {
 		PrivateCustomer privateCustomer = (PrivateCustomer) new Customer();
 		try {
@@ -73,6 +87,12 @@ public class CustomerDB implements CustomerDBIF {
 		return privateCustomer;
 	}
 	
+	/**
+	 * Builds a BusinessCustomer object from ResultSet.
+	 * @param rs
+	 * @return Customer
+	 * @throws DataAccessException
+	 */
 	public Customer buildBusinessObject(ResultSet rs) throws DataAccessException {
 		BusinessCustomer businessCustomer = (BusinessCustomer) new Customer();
 		try {

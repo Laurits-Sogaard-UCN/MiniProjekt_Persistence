@@ -15,10 +15,18 @@ public class SaleOrderDB implements SaleOrderDBIF {
 	private static final String FIND_CUSTOMER_BY_PHONE = ("");
 	private PreparedStatement findCustomerByPhone;
 	
+	/**
+	 * Constructor to initialize instance variables.
+	 * @throws DataAccessException
+	 */
 	public SaleOrderDB() throws DataAccessException {
 		init();
 	}
 	
+	/**
+	 * Initialization of database connection and PreparedStatements.
+	 * @throws DataAccessException
+	 */
 	private void init() throws DataAccessException {
 		Connection con = DBConnection.getInstance().getConnection();
 		try {
@@ -28,6 +36,10 @@ public class SaleOrderDB implements SaleOrderDBIF {
 		}
 	}
 	
+	/**
+	 * Creates a SaleOrder by executing query and building a
+	 * SaleOrder Object (done by internal method call).
+	 */
 	@Override
 	public SaleOrder createSaleOrder(String phone) throws DataAccessException {
 		SaleOrder saleOrder = new SaleOrder();
@@ -43,6 +55,12 @@ public class SaleOrderDB implements SaleOrderDBIF {
 		return saleOrder;
 	}
 	
+	/**
+	 * Builds SaleOrder object from ResultSet.
+	 * @param rs
+	 * @return SaleOrder
+	 * @throws DataAccessException
+	 */
 	public SaleOrder buildObject(ResultSet rs) throws DataAccessException {
 		SaleOrder saleOrder = new SaleOrder();
 		try {

@@ -35,7 +35,7 @@ public class GUI extends JFrame {
 	private JTextArea textArea;
 
 	/**
-	 * Launch the application.
+	 * Main method to launch the application.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -51,7 +51,7 @@ public class GUI extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Constructor to create the frame.
 	 */
 	public GUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -217,10 +217,17 @@ public class GUI extends JFrame {
 
 	}
 
+	/**
+	 * Changes GUI layout to show next panel in container.
+	 */
 	private void getNextCard() {
 		cardLayout.next(contentPane);
 	}
 	
+	/**
+	 * Creates a SaleOrder object containing a Customer and Employee object.
+	 * @throws DataAccessException
+	 */
 	private void createSaleOrder() throws DataAccessException {
 		String phone = textFieldPhone.getText();
 		SaleOrder saleOrder = saleOrderCtr.createSaleOrder(phone);
