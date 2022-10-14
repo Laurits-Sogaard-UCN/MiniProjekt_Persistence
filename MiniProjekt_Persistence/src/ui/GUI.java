@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.SaleOrderController;
+import model.Orderline;
 import model.SaleOrder;
 import utility.DataAccessException;
 
@@ -25,6 +26,7 @@ import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 
 public class GUI extends JFrame {
 
@@ -32,7 +34,11 @@ public class GUI extends JFrame {
 	private JPanel contentPane;
 	private JTextField textFieldPhone;
 	private CardLayout cardLayout;
-	private JTextArea textArea;
+	private JTextArea textAreaCustomerInfo;
+	private JTextField textFieldBarcode;
+	private JTextField textFieldQuantity;
+	private JTextArea textAreaProductsInfo;
+	private JTextArea textAreaCompletionInfo;
 
 	/**
 	 * Main method to launch the application.
@@ -149,6 +155,7 @@ public class GUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					createSaleOrder();
+					getNextCard();
 				} catch (DataAccessException e1) {
 					e1.printStackTrace();
 				}
@@ -198,12 +205,12 @@ public class GUI extends JFrame {
 		gbc_lblNewLabel.gridy = 0;
 		panel_5.add(lblNewLabel, gbc_lblNewLabel);
 		
-		textArea = new JTextArea();
+		textAreaCustomerInfo = new JTextArea();
 		GridBagConstraints gbc_textArea = new GridBagConstraints();
 		gbc_textArea.fill = GridBagConstraints.BOTH;
 		gbc_textArea.gridx = 0;
 		gbc_textArea.gridy = 1;
-		panel_5.add(textArea, gbc_textArea);
+		panel_5.add(textAreaCustomerInfo, gbc_textArea);
 		
 		JPanel panel_7 = new JPanel();
 		panelSaleOrder.add(panel_7, BorderLayout.NORTH);
@@ -211,9 +218,164 @@ public class GUI extends JFrame {
 		JLabel lblSaleHeader = new JLabel("Sale Order");
 		panel_7.add(lblSaleHeader);
 		
+		JPanel panelAddProducts = new JPanel();
+		contentPane.add(panelAddProducts, "name_756254638347500");
+		panelAddProducts.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_8 = new JPanel();
+		panelAddProducts.add(panel_8, BorderLayout.WEST);
+		GridBagLayout gbl_panel_8 = new GridBagLayout();
+		gbl_panel_8.columnWidths = new int[]{0, 0};
+		gbl_panel_8.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
+		gbl_panel_8.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_panel_8.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		panel_8.setLayout(gbl_panel_8);
+		
+		JLabel lblBarcode = new JLabel("Barcode:");
+		GridBagConstraints gbc_lblBarcode = new GridBagConstraints();
+		gbc_lblBarcode.anchor = GridBagConstraints.WEST;
+		gbc_lblBarcode.insets = new Insets(0, 0, 5, 0);
+		gbc_lblBarcode.gridx = 0;
+		gbc_lblBarcode.gridy = 0;
+		panel_8.add(lblBarcode, gbc_lblBarcode);
+		
+		textFieldBarcode = new JTextField();
+		GridBagConstraints gbc_textFieldBarcode = new GridBagConstraints();
+		gbc_textFieldBarcode.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldBarcode.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldBarcode.gridx = 0;
+		gbc_textFieldBarcode.gridy = 1;
+		panel_8.add(textFieldBarcode, gbc_textFieldBarcode);
+		textFieldBarcode.setColumns(10);
+		
+		JLabel lblQuantity = new JLabel("Quantity:");
+		GridBagConstraints gbc_lblQuantity = new GridBagConstraints();
+		gbc_lblQuantity.anchor = GridBagConstraints.WEST;
+		gbc_lblQuantity.insets = new Insets(0, 0, 5, 0);
+		gbc_lblQuantity.gridx = 0;
+		gbc_lblQuantity.gridy = 2;
+		panel_8.add(lblQuantity, gbc_lblQuantity);
+		
+		textFieldQuantity = new JTextField();
+		GridBagConstraints gbc_textFieldQuantity = new GridBagConstraints();
+		gbc_textFieldQuantity.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldQuantity.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldQuantity.gridx = 0;
+		gbc_textFieldQuantity.gridy = 3;
+		panel_8.add(textFieldQuantity, gbc_textFieldQuantity);
+		textFieldQuantity.setColumns(10);
+		
+		JButton btnAddProduct = new JButton("Add product");
+		btnAddProduct.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					addProduct();
+				} catch (DataAccessException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		GridBagConstraints gbc_btnAddProduct = new GridBagConstraints();
+		gbc_btnAddProduct.gridx = 0;
+		gbc_btnAddProduct.gridy = 5;
+		panel_8.add(btnAddProduct, gbc_btnAddProduct);
+		
+		JPanel panel_9 = new JPanel();
+		panelAddProducts.add(panel_9, BorderLayout.CENTER);
+		GridBagLayout gbl_panel_9 = new GridBagLayout();
+		gbl_panel_9.columnWidths = new int[]{0, 0};
+		gbl_panel_9.rowHeights = new int[]{0, 0, 0};
+		gbl_panel_9.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_panel_9.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+		panel_9.setLayout(gbl_panel_9);
+		
+		JLabel lblProducts = new JLabel("Products:");
+		GridBagConstraints gbc_lblProducts = new GridBagConstraints();
+		gbc_lblProducts.anchor = GridBagConstraints.WEST;
+		gbc_lblProducts.insets = new Insets(0, 0, 5, 0);
+		gbc_lblProducts.gridx = 0;
+		gbc_lblProducts.gridy = 0;
+		panel_9.add(lblProducts, gbc_lblProducts);
+		
+		textAreaProductsInfo = new JTextArea();
+		GridBagConstraints gbc_textArea_1 = new GridBagConstraints();
+		gbc_textArea_1.fill = GridBagConstraints.BOTH;
+		gbc_textArea_1.gridx = 0;
+		gbc_textArea_1.gridy = 1;
+		panel_9.add(textAreaProductsInfo, gbc_textArea_1);
+		
+		JPanel panel_10 = new JPanel();
+		FlowLayout flowLayout_1 = (FlowLayout) panel_10.getLayout();
+		flowLayout_1.setAlignment(FlowLayout.RIGHT);
+		panelAddProducts.add(panel_10, BorderLayout.SOUTH);
+		
+		JButton btnCancelAddProduct = new JButton("Cancel");
+		panel_10.add(btnCancelAddProduct);
+		
+		JButton btnComplete = new JButton("Complete");
+		btnComplete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				getNextCard();
+				completeSaleOrder();
+			}
+		});
+		panel_10.add(btnComplete);
+		
+		JPanel panel_11 = new JPanel();
+		panelAddProducts.add(panel_11, BorderLayout.NORTH);
+		
+		JLabel lblAddproductsHeader = new JLabel("Add products");
+		panel_11.add(lblAddproductsHeader);
+		
+		JPanel panelCompleteOrder = new JPanel();
+		contentPane.add(panelCompleteOrder, "name_758081808222800");
+		panelCompleteOrder.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_12 = new JPanel();
+		panelCompleteOrder.add(panel_12, BorderLayout.CENTER);
+		GridBagLayout gbl_panel_12 = new GridBagLayout();
+		gbl_panel_12.columnWidths = new int[]{0, 0};
+		gbl_panel_12.rowHeights = new int[]{0, 0, 0, 0};
+		gbl_panel_12.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_panel_12.rowWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
+		panel_12.setLayout(gbl_panel_12);
+		
+		JLabel lblCompletionInfo = new JLabel("Info:");
+		GridBagConstraints gbc_lblCompletionInfo = new GridBagConstraints();
+		gbc_lblCompletionInfo.anchor = GridBagConstraints.WEST;
+		gbc_lblCompletionInfo.insets = new Insets(0, 0, 5, 0);
+		gbc_lblCompletionInfo.gridx = 0;
+		gbc_lblCompletionInfo.gridy = 0;
+		panel_12.add(lblCompletionInfo, gbc_lblCompletionInfo);
+		
+		textAreaCompletionInfo = new JTextArea();
+		GridBagConstraints gbc_textArea1 = new GridBagConstraints();
+		gbc_textArea1.insets = new Insets(0, 0, 5, 0);
+		gbc_textArea1.fill = GridBagConstraints.BOTH;
+		gbc_textArea1.gridx = 0;
+		gbc_textArea1.gridy = 1;
+		panel_12.add(textAreaCompletionInfo, gbc_textArea1);
+		
+		JButton btnSendReceipt = new JButton("Send to email");
+		GridBagConstraints gbc_btnSendReceipt = new GridBagConstraints();
+		gbc_btnSendReceipt.gridx = 0;
+		gbc_btnSendReceipt.gridy = 2;
+		panel_12.add(btnSendReceipt, gbc_btnSendReceipt);
+		
+		JPanel panel_14 = new JPanel();
+		FlowLayout flowLayout_2 = (FlowLayout) panel_14.getLayout();
+		flowLayout_2.setAlignment(FlowLayout.RIGHT);
+		panelCompleteOrder.add(panel_14, BorderLayout.SOUTH);
+		
+		JButton btnOK = new JButton("OK");
+		panel_14.add(btnOK);
+		
 		Container container = getContentPane();
 		container.add("MainMenu", panelMainMenu);
 		container.add("SaleOrder", panelSaleOrder);
+		container.add("AddProduct", panelAddProducts);
+		container.add("CompleteOrder", panelCompleteOrder);
 
 	}
 
@@ -231,6 +393,36 @@ public class GUI extends JFrame {
 	private void createSaleOrder() throws DataAccessException {
 		String phone = textFieldPhone.getText();
 		SaleOrder saleOrder = saleOrderCtr.createSaleOrder(phone);
+		String fname = saleOrder.getCustomer().getFname();
+		String lname = saleOrder.getCustomer().getLname();
+		textAreaCustomerInfo.setText("Name: " + fname + " " + lname);
 	}
+	
+	private void addProduct() throws DataAccessException {
+		String barcodeInput = textFieldBarcode.getText();
+		int barcode = Integer.parseInt(barcodeInput);
+		String quantityInput = textFieldQuantity.getText();
+		int quantity = Integer.parseInt(quantityInput);
+		SaleOrder saleOrder = saleOrderCtr.addProduct(barcode, quantity);
+		for(Orderline element : saleOrder.getOrderlines()) {
+			textAreaProductsInfo.append("Name: " + element.getBuyProduct().getName());
+			textAreaProductsInfo.append("Price: " + element.getBuyProduct().getSalesPrice());
+			textAreaProductsInfo.append(" \n");
+		}
+		textAreaProductsInfo.append("Total: " + saleOrder.getTotal());
+	}
+	
+	private void completeSaleOrder() throws DataAccessException {
+		boolean completed = saleOrderCtr.completeSaleOrder();
+		if(completed) {
+			textAreaCompletionInfo.append("Sale order completed successfully");
+			textAreaCompletionInfo.append("Receipt has been printed");
+		}
+		else {
+			textAreaCompletionInfo.append("Sale order completion failed. Start over.");
+		}
+	}
+	
+	
 }
 

@@ -56,6 +56,14 @@ public class SaleOrderController {
 		return this.saleOrder;
 	}
 	
+	public boolean completeSaleOrder() throws DataAccessException {
+		boolean completed = false;
+		if(saleOrderDB.completeSaleOrder(this.saleOrder)) {
+			completed = true;
+		}
+		return completed;
+	}
+	
 	private double calculateTotal() {
 		double total = 0;
 		for(Orderline element : this.saleOrder.getOrderlines()) {

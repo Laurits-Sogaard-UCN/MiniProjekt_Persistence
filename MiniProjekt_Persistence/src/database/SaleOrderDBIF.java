@@ -6,5 +6,7 @@ import utility.DataAccessException;
 public interface SaleOrderDBIF {
 	
 	SaleOrder createSaleOrder(String phone) throws DataAccessException;
+	
+	boolean completeSaleOrder(SaleOrder saleOrder) throws DataAccessException;
 
 }
