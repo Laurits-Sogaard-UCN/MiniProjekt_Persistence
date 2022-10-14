@@ -97,5 +97,9 @@ public class SaleOrderController {
 		}
 		return this.saleOrder.getTotal();
 	}
+	
+	public SaleOrder getSaleOrder() {
+		return this.saleOrder;
+	}
 
 }
