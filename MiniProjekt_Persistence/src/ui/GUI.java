@@ -317,7 +317,12 @@ public class GUI extends JFrame {
 		btnComplete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				getNextCard();
-				completeSaleOrder();
+				try {
+					completeSaleOrder();
+				} catch (DataAccessException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		panel_10.add(btnComplete);
