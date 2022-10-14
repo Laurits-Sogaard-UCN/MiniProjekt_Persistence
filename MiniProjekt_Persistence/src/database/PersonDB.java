@@ -12,7 +12,10 @@ import utility.DataAccessException;
 
 public class PersonDB implements PersonDBIF {
 	
-	private static final String FIND_CUSTOMER_BY_PHONE = ("");
+	private static final String FIND_CUSTOMER_BY_PHONE = ("SELECT *\r\n"
+			+ "FROM Person p, Customer c\r\n"
+			+ "WHERE p.Phone = ?\r\n"
+			+ "and p.Phone = c.Phone;");
 	private PreparedStatement findCustomerByPhone;
 	
 	/**

@@ -16,16 +16,21 @@ import utility.DataAccessException;
 
 public class SaleOrderDB implements SaleOrderDBIF {
 	
-	private static final String FIND_CUSTOMER_BY_PHONE = ("");
+	private static final String FIND_CUSTOMER_BY_PHONE = ("SELECT *\r\n"
+			+ "FROM Person p, Customer c\r\n"
+			+ "WHERE p.Phone = ?\r\n"
+			+ "and p.Phone = c.Phone");
 	private PreparedStatement findCustomerByPhone;
 	
-	private static final String INSERT_SALE_ORDER = ("");
+	private static final String INSERT_SALE_ORDER = ("INSERT INTO SaleOrder (Date, Total, DeliveryStatus, DeliveryDate, CustomerPhone, EmployeePhone) \r\n"
+			+ "VALUES (?, ?, ?, ?, ?, ?)");
 	private PreparedStatement insertSaleOrder;
 	
-	private static final String GET_MOST_RECENT_IDENTITY = ("");
+	private static final String GET_MOST_RECENT_IDENTITY = ("SELECT SCOPE_IDENTITY() AS [SCOPE_IDENTITY];");
 	private PreparedStatement getMostRecentIdentity;
 	
-	private static final String INSERT_ORDERLINE = ("");
+	private static final String INSERT_ORDERLINE = ("INSERT INTO Orderline (Quantity, SaleOrderID, BuyProductBarcode)\r\n"
+			+ "VALUES (?, ?, ?)");
 	private PreparedStatement insertOrderline;
 	
 	/**

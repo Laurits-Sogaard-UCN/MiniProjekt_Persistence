@@ -12,13 +12,20 @@ import utility.DataAccessException;
 
 public class ProductDB implements ProductDBIF {
 	
-	private static final String FIND_BUY_PRODUCT_ON_BARCODE = ("");
+	private static final String FIND_BUY_PRODUCT_ON_BARCODE = ("SELECT *\r\n"
+			+ "FROM BuyProduct bp, Product p\r\n"
+			+ "WHERE p.Barcode = ?\r\n"
+			+ "and bp.Barcode = p.Barcode;");
 	private PreparedStatement findBuyProductOnBarcode;
 	
-	private static final String UPDATE_CURRENT_STOCK = ("");
+	private static final String UPDATE_CURRENT_STOCK = ("UPDATE Product\r\n"
+			+ "SET CurrentStock = ?\r\n"
+			+ "WHERE Barcode = ?");
 	private PreparedStatement updateCurrentStock;
 	
-	private static final String FIND_CURRENT_STOCK = ("");
+	private static final String FIND_CURRENT_STOCK = ("SELECT p.CurrentStock\r\n"
+			+ "FROM Product p\r\n"
+			+ "WHERE p.Barcode = ?");
 	private PreparedStatement findCurrentStock;
 	
 	public ProductDB() throws DataAccessException {

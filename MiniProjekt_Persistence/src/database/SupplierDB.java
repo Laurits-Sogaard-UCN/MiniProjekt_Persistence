@@ -12,7 +12,11 @@ import utility.DataAccessException;
 
 public class SupplierDB implements SupplierDBIF {
 	
-	private static final String FIND_SUPPLIER_ON_PHONE = ("");
+	private static final String FIND_SUPPLIER_ON_PHONE = ("SELECT s.*, a.*, ac.City, ac.Country\r\n"
+			+ "FROM Supplier s, Address a, AddressCity ac\r\n"
+			+ "WHERE s.Phone = ?\r\n"
+			+ "and s.AddressID = a.ID\r\n"
+			+ "and a.Zipcode = ac.Zipcode");
 	private PreparedStatement findSupplierOnPhone;
 	
 	public SupplierDB() throws DataAccessException {
