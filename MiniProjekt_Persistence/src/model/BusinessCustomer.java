@@ -5,6 +5,7 @@ public class BusinessCustomer extends Customer {
 	private String businessName;
 	private int CVR;
 	private int discount;
+	
 	/**
 	 * @param fname
 	 * @param lname
@@ -13,20 +14,21 @@ public class BusinessCustomer extends Customer {
 	 * @param city
 	 * @param phone
 	 * @param email
+	 * @param customerType
 	 * @param businessName
 	 * @param cVR
 	 * @param discount
 	 */
 	public BusinessCustomer(String fname, String lname, String address, int zipcode, String city, String phone,
-			String email, String businessName, int cVR, int discount) {
-		super(fname, lname, address, zipcode, city, phone, email);
+			String email, Customer customerType, String businessName, int cVR, int discount) {
+		super(fname, lname, address, zipcode, city, phone, email, customerType);
 		this.businessName = businessName;
 		CVR = cVR;
 		this.discount = discount;
 	}
-	
+
 	public BusinessCustomer() {
-		super(null, null, null, 0, null, null, null);
+		super(null, null, null, 0, null, null, null, null);
 	}
 
 	/**

@@ -2,7 +2,7 @@ package model;
 
 public class BuyProduct extends Product {
 	
-	private int size;
+	private int amount;
 	private BuyProduct BuyProductType;
 	
 	/**
@@ -19,10 +19,10 @@ public class BuyProduct extends Product {
 	 * @param buyProductType
 	 */
 	public BuyProduct(int barcode, String name, double purchasePrice, String countryOfOrigin, int minStock,
-			int currentStock, double salesPrice, Product productType, Supplier supplier, int size,
+			int currentStock, double salesPrice, Product productType, Supplier supplier, int amount,
 			BuyProduct buyProductType) {
 		super(barcode, name, purchasePrice, countryOfOrigin, minStock, currentStock, salesPrice, productType, supplier);
-		this.size = size;
+		this.amount = amount;
 		BuyProductType = buyProductType;
 	}
 	
@@ -32,14 +32,14 @@ public class BuyProduct extends Product {
 	/**
 	 * @return the size
 	 */
-	public int getSize() {
-		return size;
+	public int getAmount() {
+		return amount;
 	}
 	/**
 	 * @param size the size to set
 	 */
-	public void setSize(int size) {
-		this.size = size;
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 	/**
 	 * @return the buyProductType

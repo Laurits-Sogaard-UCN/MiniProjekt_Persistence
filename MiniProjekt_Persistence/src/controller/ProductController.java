@@ -3,6 +3,7 @@ package controller;
 import database.ProductDB;
 import database.ProductDBIF;
 import model.BuyProduct;
+import utility.DataAccessException;
 
 public class ProductController {
 	
@@ -10,12 +11,13 @@ public class ProductController {
 
 	/**
 	 * @param productDB
+	 * @throws DataAccessException 
 	 */
-	public ProductController() {
+	public ProductController() throws DataAccessException {
 		this.productDB = new ProductDB();
 	}
 	
-	public BuyProduct findBuyProductOnBarcode(int barcode, int quantity) {
+	public BuyProduct findBuyProductOnBarcode(int barcode, int quantity) throws DataAccessException {
 		BuyProduct buyProduct = productDB.findBuyProductOnBarcode(barcode, quantity);
 		return buyProduct;
 	}

@@ -3,7 +3,7 @@ package model;
 public class PrivateCustomer extends Customer {
 	
 	private int freeShipping;
-
+	
 	/**
 	 * @param fname
 	 * @param lname
@@ -12,16 +12,17 @@ public class PrivateCustomer extends Customer {
 	 * @param city
 	 * @param phone
 	 * @param email
+	 * @param customerType
 	 * @param freeShipping
 	 */
 	public PrivateCustomer(String fname, String lname, String address, int zipcode, String city, String phone,
-			String email, int freeShipping) {
-		super(fname, lname, address, zipcode, city, phone, email);
+			String email, Customer customerType, int freeShipping) {
+		super(fname, lname, address, zipcode, city, phone, email, customerType);
 		this.freeShipping = freeShipping;
 	}
-	
+
 	public PrivateCustomer() {
-		super(null, null, null, 0, null, null, null);
+		super(null, null, null, 0, null, null, null, null);
 	}
 
 	/**

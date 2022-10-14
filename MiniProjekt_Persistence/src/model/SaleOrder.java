@@ -20,11 +20,11 @@ public class SaleOrder {
 	 * @param customer
 	 * @param employee
 	 */
-	public SaleOrder(LocalDate date, double total, String deliveryStatus, LocalDate deliveryDate, Customer customer,
+	public SaleOrder(LocalDate date, String deliveryStatus, LocalDate deliveryDate, Customer customer,
 			Employee employee) {
 		super();
 		this.date = date;
-		this.total = total;
+		this.total = 0;
 		this.deliveryStatus = deliveryStatus;
 		this.deliveryDate = deliveryDate;
 		this.customer = customer;
@@ -106,6 +106,11 @@ public class SaleOrder {
 	 */
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
+	}
+	
+	public Orderline createOrderline(BuyProduct buyProduct, int quantity, SaleOrder saleOrder) {
+		Orderline orderline = new Orderline(buyProduct, quantity, saleOrder);
+		return orderline;
 	}
 	
 	public void addOrderline(Orderline ol) {

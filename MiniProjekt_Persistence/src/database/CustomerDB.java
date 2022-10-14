@@ -76,6 +76,7 @@ public class CustomerDB implements CustomerDBIF {
 					privateCustomer.setCity(rs.getString("City"));
 					privateCustomer.setEmail(rs.getString("Email"));
 					privateCustomer.setPhone(rs.getString("Phone"));
+					privateCustomer.setCustomerType(privateCustomer);
 					privateCustomer.setFreeShipping(rs.getInt("FreeShipping"));
 				} catch(SQLException e) {
 					throw new DataAccessException("Could not build object", e);
@@ -105,6 +106,7 @@ public class CustomerDB implements CustomerDBIF {
 					businessCustomer.setCity(rs.getString("City"));
 					businessCustomer.setEmail(rs.getString("Email"));
 					businessCustomer.setPhone(rs.getString("Phone"));
+					businessCustomer.setCustomerType(businessCustomer);
 					businessCustomer.setDiscount(rs.getInt("Discount"));
 					businessCustomer.setBusinessName(rs.getString("BusinessName"));
 					businessCustomer.setCVR(rs.getInt("CVR"));

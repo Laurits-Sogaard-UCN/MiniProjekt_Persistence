@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import model.BuyProduct;
+import model.Clothing;
+import model.Supplier;
 import utility.DataAccessException;
 
 public class ProductDB implements ProductDBIF {
@@ -34,6 +36,7 @@ public class ProductDB implements ProductDBIF {
 		}
 	}
 	
+	@Override
 	public BuyProduct findBuyProductOnBarcode(int barcode, int quantity) throws DataAccessException {
 		BuyProduct buyProduct = new BuyProduct();
 		int rowsAffected = 0;
@@ -65,23 +68,51 @@ public class ProductDB implements ProductDBIF {
 		BuyProduct buyProduct = new BuyProduct();
 		try {
 			if(rs.getString("BuyProductType").equals("Clothing")) {
-				buyProduct.setBarcode(rs.getInt("Barcode"));
-				buyProduct.setName(rs.getString("Name"));
-				buyProduct.setPurchasePrice(rs.getFloat("PurchasePrice"));
-				buyProduct.setCountryOfOrigin(rs.getString("CountryOfOrigin"));
-				buyProduct.setMinStock(rs.getInt("MinStock"));
-				buyProduct.setCurrentStock(rs.getInt("CurrentStock"));
-				buyProduct.setSalesPrice(rs.getFloat("SalesPrice"));
-				buyProduct.setBuyProductType(new Clothing());
+				buyProduct = buildClothingObject(rs);
 			}
 			else if(rs.getString("BuyProductType").equals("Equipment")) {
-				buyProduct.setBuyProductType(new Equipment());
+				//TODO
+				buildEquipmentObject(rs);
 			}
 			else if(rs.getString("BuyProductType").equals("GunReplica")) {
-				buyProduct.setBuyProductType(new GunReplica());
+				//TODO
+				buildGunReplicaObject(rs);
 			}
 		} catch(SQLException e) {
 			throw new DataAccessException("Could not build object", e);
 		}
+		return buyProduct;
 	}
+	
+	private BuyProduct buildClothingObject(ResultSet rs) throws DataAccessException {
+		Clothing buyProduct = (Clothing) new BuyProduct();
+		try {
+			buyProduct.setBarcode(rs.getInt("Barcode"));
+			buyProduct.setName(rs.getString("Name"));
+			buyProduct.setPurchasePrice(rs.getFloat("PurchasePrice"));
+			buyProduct.setCountryOfOrigin(rs.getString("CountryOfOrigin"));
+			buyProduct.setMinStock(rs.getInt("MinStock"));
+			buyProduct.setCurrentStock(rs.getInt("CurrentStock"));
+			buyProduct.setSalesPrice(rs.getFloat("SalesPrice"));
+			buyProduct.setColour(rs.getString("Colour"));
+			buyProduct.setSize(rs.getInt("Size"));
+			buyProduct.setAmount(rs.getInt("Amount"));
+			buyProduct.setProductType(buyProduct);
+			buyProduct.setBuyProductType(buyProduct);
+			buyProduct.setSupplier(new Supplier(rs.getString("SupplierPhone")));
+		} catch(SQLException e) {
+			throw new DataAccessException("Could not build object", e);
+		}
+		return buyProduct;
+	}
+	
+	private void buildEquipmentObject(ResultSet rs) {
+		//TODO
+	}
+	
+	private void buildGunReplicaObject(ResultSet rs) {
+		//TODO
+	}
+	
+	
 }
