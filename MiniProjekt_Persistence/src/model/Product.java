@@ -10,6 +10,7 @@ public class Product {
 	private int minStock;
 	private int currentStock;
 	private double salesPrice;
+	private Product productType;
 	private Supplier supplier;
 	
 	/**
@@ -20,11 +21,11 @@ public class Product {
 	 * @param minStock
 	 * @param currentStock
 	 * @param salesPrice
+	 * @param productType
 	 * @param supplier
 	 */
 	public Product(int barcode, String name, double purchasePrice, String countryOfOrigin, int minStock,
-			int currentStock, double salesPrice, Supplier supplier) {
-		super();
+			int currentStock, double salesPrice, Product productType, Supplier supplier) {
 		this.barcode = barcode;
 		this.name = name;
 		this.purchasePrice = purchasePrice;
@@ -32,6 +33,7 @@ public class Product {
 		this.minStock = minStock;
 		this.currentStock = currentStock;
 		this.salesPrice = salesPrice;
+		this.productType = productType;
 		this.supplier = supplier;
 	}
 
@@ -131,6 +133,20 @@ public class Product {
 	 */
 	public void setSalesPrice(double salesPrice) {
 		this.salesPrice = salesPrice;
+	}
+	
+	/**
+	 * @return the productType
+	 */
+	public Product getProductType() {
+		return productType;
+	}
+
+	/**
+	 * @param productType the productType to set
+	 */
+	public void setProductType(Product productType) {
+		this.productType = productType;
 	}
 
 	/**

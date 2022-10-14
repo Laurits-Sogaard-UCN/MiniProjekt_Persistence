@@ -34,7 +34,7 @@ public class ProductDB implements ProductDBIF {
 		}
 	}
 	
-	public BuyProduct findBuyProductOnBarcode(int barcode, int quantity) {
+	public BuyProduct findBuyProductOnBarcode(int barcode, int quantity) throws DataAccessException {
 		BuyProduct buyProduct = new BuyProduct();
 		int rowsAffected = 0;
 		try {
@@ -61,7 +61,27 @@ public class ProductDB implements ProductDBIF {
 		return buyProduct;
 	}
 	
-	private BuyProduct buildBuyProductObject(ResultSet rs) {
-		
+	private BuyProduct buildBuyProductObject(ResultSet rs) throws DataAccessException {
+		BuyProduct buyProduct = new BuyProduct();
+		try {
+			if(rs.getString("BuyProductType").equals("Clothing")) {
+				buyProduct.setBarcode(rs.getInt("Barcode"));
+				buyProduct.setName(rs.getString("Name"));
+				buyProduct.setPurchasePrice(rs.getFloat("PurchasePrice"));
+				buyProduct.setCountryOfOrigin(rs.getString("CountryOfOrigin"));
+				buyProduct.setMinStock(rs.getInt("MinStock"));
+				buyProduct.setCurrentStock(rs.getInt("CurrentStock"));
+				buyProduct.setSalesPrice(rs.getFloat("SalesPrice"));
+				buyProduct.setBuyProductType(new Clothing());
+			}
+			else if(rs.getString("BuyProductType").equals("Equipment")) {
+				buyProduct.setBuyProductType(new Equipment());
+			}
+			else if(rs.getString("BuyProductType").equals("GunReplica")) {
+				buyProduct.setBuyProductType(new GunReplica());
+			}
+		} catch(SQLException e) {
+			throw new DataAccessException("Could not build object", e);
+		}
 	}
 }
