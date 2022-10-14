@@ -62,7 +62,7 @@ public class ProductDB implements ProductDBIF {
 			rowsAffected = updateCurrentStock.executeUpdate();
 			DBConnection.getInstance().commitTransaction();
 			
-			if(rowsAffected > 0) {
+			if(rowsAffected > 0 && rs.next()) {
 				buyProduct = buildBuyProductObject(rs);
 			}
 		} catch(SQLException e) {

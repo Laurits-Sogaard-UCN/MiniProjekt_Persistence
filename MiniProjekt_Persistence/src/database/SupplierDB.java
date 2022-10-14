@@ -38,7 +38,9 @@ public class SupplierDB implements SupplierDBIF {
 		try {
 			findSupplierOnPhone.setString(1, phone);
 			ResultSet rs = findSupplierOnPhone.executeQuery();
-			supplier = buildObject(rs);
+			if(rs.next()) {
+				supplier = buildObject(rs);
+			}
 		} catch(SQLException e) {
 			throw new DataAccessException("Could not execute query", e);
 		}
