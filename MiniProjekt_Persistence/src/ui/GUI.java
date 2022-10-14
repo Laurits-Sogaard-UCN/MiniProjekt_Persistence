@@ -563,6 +563,9 @@ public class GUI extends JFrame {
 		cardLayout.next(contentPane);
 	}
 	
+	/**
+	 * Changes GUI layout to show MainMenu panel in container.
+	 */
 	private void getMainMenuCard() {
 		cardLayout.first(contentPane);
 	}

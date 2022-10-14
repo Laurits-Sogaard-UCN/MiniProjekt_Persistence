@@ -75,6 +75,7 @@ public class SaleOrderController {
 		if(saleOrderDB.completeSaleOrder(this.saleOrder)) {
 			completed = true;
 		}
+		this.saleOrder = null;
 		return completed;
 	}
 	
@@ -98,6 +99,10 @@ public class SaleOrderController {
 		return this.saleOrder.getTotal();
 	}
 	
+	/**
+	 * Gets SaleOrder instance variable.
+	 * @return SaleOrder
+	 */
 	public SaleOrder getSaleOrder() {
 		return this.saleOrder;
 	}
