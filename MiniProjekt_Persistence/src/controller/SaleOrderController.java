@@ -28,6 +28,7 @@ public class SaleOrderController {
 	public SaleOrderController() throws DataAccessException {
 		saleOrderDB = new SaleOrderDB();
 		personCtr = new PersonController();
+		productCtr = new ProductController();
 		supplierCtr = new SupplierController();
 	}
 	
@@ -38,7 +39,7 @@ public class SaleOrderController {
 	 * @throws DataAccessException
 	 */
 	public SaleOrder createSaleOrder(String phone) throws DataAccessException {
-		this.saleOrder = saleOrderDB.createSaleOrder(phone);
+		this.saleOrder = saleOrderDB.createSaleOrder();
 		Employee employee = personCtr.findCurrentEmployee();
 		Customer customer = personCtr.findCustomerByPhone(phone);
 		this.saleOrder.setEmployee(employee);

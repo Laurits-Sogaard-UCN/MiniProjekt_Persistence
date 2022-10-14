@@ -33,7 +33,7 @@ public class SaleOrder {
 	}
 	
 	public SaleOrder() {
-		
+		this.orderlines = new ArrayList<>();
 	}
 	/**
 	 * @return the date

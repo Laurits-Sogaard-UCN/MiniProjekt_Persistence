@@ -13,9 +13,10 @@ import utility.DataAccessException;
 public class ProductDB implements ProductDBIF {
 	
 	private static final String FIND_BUY_PRODUCT_ON_BARCODE = ("SELECT *\r\n"
-			+ "FROM BuyProduct bp, Product p\r\n"
+			+ "FROM BuyProduct bp, Product p, Clothing c\r\n"
 			+ "WHERE p.Barcode = ?\r\n"
-			+ "and bp.Barcode = p.Barcode;");
+			+ "and bp.Barcode = p.Barcode \r\n"
+			+ "and c.Barcode = bp.Barcode");
 	private PreparedStatement findBuyProductOnBarcode;
 	
 	private static final String UPDATE_CURRENT_STOCK = ("UPDATE Product\r\n"
@@ -72,9 +73,10 @@ public class ProductDB implements ProductDBIF {
 	}
 	
 	private BuyProduct buildBuyProductObject(ResultSet rs) throws DataAccessException {
-		BuyProduct buyProduct = new BuyProduct();
+		BuyProduct buyProduct = null;
 		try {
 			if(rs.getString("BuyProductType").equals("Clothing")) {
+				buyProduct = (BuyProduct) new Clothing();
 				buyProduct = buildClothingObject(rs);
 			}
 			else if(rs.getString("BuyProductType").equals("Equipment")) {
@@ -91,8 +93,8 @@ public class ProductDB implements ProductDBIF {
 		return buyProduct;
 	}
 	
-	private BuyProduct buildClothingObject(ResultSet rs) throws DataAccessException {
-		Clothing buyProduct = (Clothing) new BuyProduct();
+	private Clothing buildClothingObject(ResultSet rs) throws DataAccessException {
+		Clothing buyProduct = new Clothing();
 		try {
 			buyProduct.setBarcode(rs.getInt("Barcode"));
 			buyProduct.setName(rs.getString("Name"));

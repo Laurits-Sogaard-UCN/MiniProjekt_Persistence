@@ -2,7 +2,7 @@ package model;
 
 public class Employee extends Person {
 	
-	private int CPR;
+	private String CPR;
 	
 	/**
 	 * @param fname
@@ -15,9 +15,9 @@ public class Employee extends Person {
 	 * @param cPR
 	 */
 	public Employee(String fname, String lname, String address, int zipcode, String city, String phone, String email,
-			int cPR) {
+			String CPR) {
 		super(fname, lname, address, zipcode, city, phone, email);
-		CPR = cPR;
+		CPR = CPR;
 	}
 
 

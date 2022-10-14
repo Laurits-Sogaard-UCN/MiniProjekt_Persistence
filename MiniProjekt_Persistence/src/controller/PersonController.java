@@ -17,7 +17,7 @@ public class PersonController {
 	 */
 	public PersonController() throws DataAccessException {
 		personDB = new PersonDB();
-		this.employee = new Employee("Bo", "Hansen", "Vej 1", 9000, "Aalborg", "+4512345678", "mail.bo", 1234567890);
+		this.employee = new Employee("Anne", "Svendson", "Billegade 10", 9000, "Aalborg", "+4512344321", "Person1@mail.com", "9876543210");
 	}
 	
 	/**

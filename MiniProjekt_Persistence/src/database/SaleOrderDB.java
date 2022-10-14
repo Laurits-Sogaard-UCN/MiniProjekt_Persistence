@@ -26,7 +26,7 @@ public class SaleOrderDB implements SaleOrderDBIF {
 			+ "VALUES (?, ?, ?, ?, ?, ?)");
 	private PreparedStatement insertSaleOrder;
 	
-	private static final String GET_MOST_RECENT_IDENTITY = ("SELECT SCOPE_IDENTITY() AS [SCOPE_IDENTITY];");
+	private static final String GET_MOST_RECENT_IDENTITY = ("SELECT SCOPE_IDENTITY() AS [ID];");
 	private PreparedStatement getMostRecentIdentity;
 	
 	private static final String INSERT_ORDERLINE = ("INSERT INTO Orderline (Quantity, SaleOrderID, BuyProductBarcode)\r\n"
@@ -49,7 +49,7 @@ public class SaleOrderDB implements SaleOrderDBIF {
 		Connection con = DBConnection.getInstance().getConnection();
 		try {
 			findCustomerByPhone = con.prepareStatement(FIND_CUSTOMER_BY_PHONE);
-			insertSaleOrder = con.prepareStatement(INSERT_SALE_ORDER);
+			insertSaleOrder = con.prepareStatement(INSERT_SALE_ORDER, PreparedStatement.RETURN_GENERATED_KEYS);
 			getMostRecentIdentity = con.prepareStatement(GET_MOST_RECENT_IDENTITY);
 			insertOrderline = con.prepareStatement(INSERT_ORDERLINE);
 		} catch(SQLException e) {
@@ -62,17 +62,14 @@ public class SaleOrderDB implements SaleOrderDBIF {
 	 * SaleOrder Object (done by internal method call).
 	 */
 	@Override
-	public SaleOrder createSaleOrder(String phone) throws DataAccessException {
+	public SaleOrder createSaleOrder() {
 		SaleOrder saleOrder = new SaleOrder();
-		try {
-			findCustomerByPhone.setString(1, phone);
-			ResultSet rs = findCustomerByPhone.executeQuery();
-			if(rs.next()) {
-				saleOrder = buildObject(rs);
-			}
-		} catch(SQLException e) {
-			throw new DataAccessException("Could not build object", e);
-		}
+		saleOrder.setDate(LocalDate.now());
+		saleOrder.setDeliveryStatus("In progress");
+		saleOrder.setDeliveryDate(null);
+		saleOrder.setTotal(0);
+		saleOrder.setCustomer(null);
+		saleOrder.setEmployee(null);
 		return saleOrder;
 	}
 	
@@ -83,16 +80,19 @@ public class SaleOrderDB implements SaleOrderDBIF {
 		int rowsAffected2 = 0;
 		
 		LocalDate localDate = saleOrder.getDate();
-		Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		java.sql.Date date = java.sql.Date.valueOf(localDate);
 		double total = saleOrder.getTotal();
 		String deliveryStatus = saleOrder.getDeliveryStatus();
 		LocalDate localDeliveryDate = saleOrder.getDeliveryDate();
-		Date deliveryDate = Date.from(localDeliveryDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		Date deliveryDate = null;
+		if(localDeliveryDate != null) {
+			deliveryDate = Date.from(localDeliveryDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		}
 		String customerPhone = saleOrder.getCustomer().getPhone();
 		String employeePhone = saleOrder.getEmployee().getPhone();
 		
 		try {
-			insertSaleOrder.setDate(1, (java.sql.Date) date);
+			insertSaleOrder.setDate(1, date);
 			insertSaleOrder.setDouble(2, total);
 			insertSaleOrder.setString(3, deliveryStatus);
 			insertSaleOrder.setDate(4, (java.sql.Date) deliveryDate);
@@ -101,15 +101,13 @@ public class SaleOrderDB implements SaleOrderDBIF {
 			
 			DBConnection.getInstance().startTransaction();
 			rowsAffected1 = insertSaleOrder.executeUpdate();
-			ResultSet rs = getMostRecentIdentity.executeQuery();
+			ResultSet rs = insertSaleOrder.getGeneratedKeys();
 			int id = 0;
 			if(rs.next()) {
-				double identity = rs.getFloat(1);
-				id = (int) identity;
+				id = rs.getInt(1);
 			}
 			for(Orderline element : saleOrder.getOrderlines()) {
 				int quantity = element.getQuantity();
-				int saleOrderID = id;
 				int buyProductBarcode = element.getBuyProduct().getBarcode();
 				insertOrderline.setInt(1, quantity);
 				insertOrderline.setInt(2, id);
@@ -128,25 +126,25 @@ public class SaleOrderDB implements SaleOrderDBIF {
 		return completed;
 	}
 	
-	/**
-	 * Builds SaleOrder object from ResultSet.
-	 * @param rs
-	 * @return SaleOrder
-	 * @throws DataAccessException
-	 */
-	private SaleOrder buildObject(ResultSet rs) throws DataAccessException {
-		SaleOrder saleOrder = new SaleOrder();
-		try {
-			saleOrder.setDate(rs.getDate("Date").toLocalDate());
-			saleOrder.setDeliveryStatus(rs.getString("DeliveryStatus"));
-			saleOrder.setDeliveryDate(rs.getDate("DeliveryDate").toLocalDate());
-			saleOrder.setTotal(rs.getFloat("Total"));
-			saleOrder.setCustomer(new Customer(rs.getString("CustomerPhone")));
-			saleOrder.setEmployee(new Employee(rs.getString("EmployeePhone")));
-		} catch(SQLException e) {
-			throw new DataAccessException("Could not build object", e);
-		}
-		return saleOrder;
-	}
+//	/**
+//	 * Builds SaleOrder object from ResultSet.
+//	 * @param rs
+//	 * @return SaleOrder
+//	 * @throws DataAccessException
+//	 */
+//	private SaleOrder buildObject(ResultSet rs) throws DataAccessException {
+//		SaleOrder saleOrder = new SaleOrder();
+//		try {
+//			saleOrder.setDate(rs.getDate("Date").toLocalDate());
+//			saleOrder.setDeliveryStatus(rs.getString("DeliveryStatus"));
+//			saleOrder.setDeliveryDate(rs.getDate("DeliveryDate").toLocalDate());
+//			saleOrder.setTotal(rs.getFloat("Total"));
+//			saleOrder.setCustomer(new Customer(rs.getString("CustomerPhone")));
+//			saleOrder.setEmployee(new Employee(rs.getString("EmployeePhone")));
+//		} catch(SQLException e) {
+//			throw new DataAccessException("Could not build object", e);
+//		}
+//		return saleOrder;
+//	}
 
 }

@@ -12,10 +12,14 @@ import utility.DataAccessException;
 
 public class PersonDB implements PersonDBIF {
 	
-	private static final String FIND_CUSTOMER_BY_PHONE = ("SELECT *\r\n"
-			+ "FROM Person p, Customer c\r\n"
+	private static final String FIND_CUSTOMER_BY_PHONE = ("SELECT p.*, c.*, d.Discount, a.*, ac.City\r\n"
+			+ "FROM Person p, Customer c, PrivateCustomer pc, Discount d, Address a, AddressCity ac\r\n"
 			+ "WHERE p.Phone = ?\r\n"
-			+ "and p.Phone = c.Phone;");
+			+ "and p.Phone = c.Phone\r\n"
+			+ "and c.Phone = pc.Phone\r\n"
+			+ "and d.ID = pc.DiscountID\r\n"
+			+ "and p.AddressID = a.ID\r\n"
+			+ "and a.Zipcode = ac.Zipcode");
 	private PreparedStatement findCustomerByPhone;
 	
 	/**
@@ -49,10 +53,10 @@ public class PersonDB implements PersonDBIF {
 		try {
 			findCustomerByPhone.setString(1, phone);
 			ResultSet rs = findCustomerByPhone.executeQuery();
-			if(rs.next() && rs.getString("CustomerType").equals("Private")) {
+			if(rs.next() && rs.getString("CustomerType").equals("PrivateCustomer")) {
 				customer = buildPrivateCustomerObject(rs);
 			}
-			else if(rs.next() && rs.getString("CustomerType").equals("Business")) {
+			else if(rs.next() && rs.getString("CustomerType").equals("BusinessCustomer")) {
 				customer = buildBusinessCustomerObject(rs);
 			}
 		} catch(SQLException e) {
@@ -67,26 +71,20 @@ public class PersonDB implements PersonDBIF {
 	 * @return Customer
 	 * @throws DataAccessException
 	 */
-	private Customer buildPrivateCustomerObject(ResultSet rs) throws DataAccessException {
-		PrivateCustomer privateCustomer = (PrivateCustomer) new Customer();
+	private PrivateCustomer buildPrivateCustomerObject(ResultSet rs) throws DataAccessException {
+		PrivateCustomer privateCustomer = new PrivateCustomer();
 		try {
-			if(rs.getString("CustomerType").equals("Private")) {
-				try {
-					privateCustomer.setFname(rs.getString("Fname"));
-					privateCustomer.setLname(rs.getString("Lname"));
-					privateCustomer.setAddress(rs.getInt("Street") + " " + rs.getString("StreetNumber"));
-					privateCustomer.setZipcode(rs.getInt("Zipcode"));
-					privateCustomer.setCity(rs.getString("City"));
-					privateCustomer.setEmail(rs.getString("Email"));
-					privateCustomer.setPhone(rs.getString("Phone"));
-					privateCustomer.setCustomerType(privateCustomer);
-					privateCustomer.setFreeShipping(rs.getInt("FreeShipping"));
-				} catch(SQLException e) {
-					throw new DataAccessException("Could not build object", e);
-				}
-			}
+			privateCustomer.setFname(rs.getString("Fname"));
+			privateCustomer.setLname(rs.getString("Lname"));
+			privateCustomer.setAddress(rs.getString("Street") + " " + rs.getInt("StreetNumber"));
+			privateCustomer.setZipcode(rs.getInt("Zipcode"));
+			privateCustomer.setCity(rs.getString("City"));
+			privateCustomer.setEmail(rs.getString("Email"));
+			privateCustomer.setPhone(rs.getString("Phone"));
+			privateCustomer.setCustomerType(privateCustomer);
+			privateCustomer.setFreeShipping(rs.getInt("Discount"));
 		} catch(SQLException e) {
-			throw new DataAccessException("", e);
+			throw new DataAccessException("Could not build object", e);
 		}
 		return privateCustomer;
 	}
@@ -97,8 +95,8 @@ public class PersonDB implements PersonDBIF {
 	 * @return Customer
 	 * @throws DataAccessException
 	 */
-	private Customer buildBusinessCustomerObject(ResultSet rs) throws DataAccessException {
-		BusinessCustomer businessCustomer = (BusinessCustomer) new Customer();
+	private BusinessCustomer buildBusinessCustomerObject(ResultSet rs) throws DataAccessException {
+		BusinessCustomer businessCustomer = new BusinessCustomer();
 		try {
 			if(rs.getString("CustomerType").equals("Private")) {
 				try {

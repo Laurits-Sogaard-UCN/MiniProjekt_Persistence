@@ -58,8 +58,11 @@ public class GUI extends JFrame {
 
 	/**
 	 * Constructor to create the frame.
+	 * @throws DataAccessException 
 	 */
-	public GUI() {
+	public GUI() throws DataAccessException {
+		this.saleOrderCtr = new SaleOrderController();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
