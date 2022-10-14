@@ -132,7 +132,8 @@ public class GUI extends JFrame {
 		gbl_panel_6.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_6.setLayout(gbl_panel_6);
 		
-		JLabel lblCustomerPhone = new JLabel("Customer phone:");
+		JLabel lblCustomerPhone = new JLabel("Phone:");
+		lblCustomerPhone.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GridBagConstraints gbc_lblCustomerPhone = new GridBagConstraints();
 		gbc_lblCustomerPhone.anchor = GridBagConstraints.WEST;
 		gbc_lblCustomerPhone.insets = new Insets(0, 0, 5, 0);
@@ -180,6 +181,7 @@ public class GUI extends JFrame {
 		panel_5.setLayout(gbl_panel_5);
 		
 		JLabel lblNewLabel = new JLabel("Customer info:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
@@ -195,9 +197,12 @@ public class GUI extends JFrame {
 		panel_5.add(textAreaCustomerInfo, gbc_textAreaTotal);
 		
 		JPanel panel_7 = new JPanel();
+		FlowLayout flowLayout_3 = (FlowLayout) panel_7.getLayout();
+		flowLayout_3.setVgap(10);
 		panelSaleOrder.add(panel_7, BorderLayout.NORTH);
 		
 		JLabel lblSaleHeader = new JLabel("Sale Order");
+		lblSaleHeader.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panel_7.add(lblSaleHeader);
 		
 		JPanel panelAddProducts = new JPanel();
@@ -214,6 +219,7 @@ public class GUI extends JFrame {
 		panel_8.setLayout(gbl_panel_8);
 		
 		JLabel lblBarcode = new JLabel("Barcode:");
+		lblBarcode.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GridBagConstraints gbc_lblBarcode = new GridBagConstraints();
 		gbc_lblBarcode.anchor = GridBagConstraints.WEST;
 		gbc_lblBarcode.insets = new Insets(0, 0, 5, 0);
@@ -231,6 +237,7 @@ public class GUI extends JFrame {
 		textFieldBarcode.setColumns(10);
 		
 		JLabel lblQuantity = new JLabel("Quantity:");
+		lblQuantity.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GridBagConstraints gbc_lblQuantity = new GridBagConstraints();
 		gbc_lblQuantity.anchor = GridBagConstraints.WEST;
 		gbc_lblQuantity.insets = new Insets(0, 0, 5, 0);
@@ -292,6 +299,7 @@ public class GUI extends JFrame {
 		panel_13.setLayout(gbl_panel_13);
 		
 		JLabel lblPrice = new JLabel("Product price:");
+		lblPrice.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GridBagConstraints gbc_lblPrice = new GridBagConstraints();
 		gbc_lblPrice.anchor = GridBagConstraints.WEST;
 		gbc_lblPrice.insets = new Insets(0, 0, 5, 0);
@@ -324,6 +332,7 @@ public class GUI extends JFrame {
 		panel_15.setLayout(gbl_panel_15);
 		
 		JLabel lblProductInfo = new JLabel("Product info:");
+		lblProductInfo.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GridBagConstraints gbc_lblProductInfo = new GridBagConstraints();
 		gbc_lblProductInfo.anchor = GridBagConstraints.WEST;
 		gbc_lblProductInfo.insets = new Insets(0, 0, 5, 0);
@@ -390,9 +399,12 @@ public class GUI extends JFrame {
 		panel_10.add(btnComplete);
 		
 		JPanel panel_11 = new JPanel();
+		FlowLayout flowLayout_4 = (FlowLayout) panel_11.getLayout();
+		flowLayout_4.setVgap(10);
 		panelAddProducts.add(panel_11, BorderLayout.NORTH);
 		
 		JLabel lblAddproductsHeader = new JLabel("Add products");
+		lblAddproductsHeader.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panel_11.add(lblAddproductsHeader);
 		
 		JPanel panelCompleteOrder = new JPanel();
@@ -408,9 +420,9 @@ public class GUI extends JFrame {
 		gbl_panel_12.rowWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
 		panel_12.setLayout(gbl_panel_12);
 		
-		JLabel lblCompletionInfo = new JLabel("Info:");
+		JLabel lblCompletionInfo = new JLabel("Complete");
+		lblCompletionInfo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_lblCompletionInfo = new GridBagConstraints();
-		gbc_lblCompletionInfo.anchor = GridBagConstraints.WEST;
 		gbc_lblCompletionInfo.insets = new Insets(0, 0, 5, 0);
 		gbc_lblCompletionInfo.gridx = 0;
 		gbc_lblCompletionInfo.gridy = 0;
@@ -425,6 +437,11 @@ public class GUI extends JFrame {
 		panel_12.add(textAreaCompletionInfo, gbc_textArea11);
 		
 		JButton btnSendReceipt = new JButton("Send to email");
+		btnSendReceipt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textAreaCompletionInfo.append("Email with receipt has been sent to customer");
+			}
+		});
 		GridBagConstraints gbc_btnSendReceipt = new GridBagConstraints();
 		gbc_btnSendReceipt.gridx = 0;
 		gbc_btnSendReceipt.gridy = 2;
@@ -436,6 +453,11 @@ public class GUI extends JFrame {
 		panelCompleteOrder.add(panel_14, BorderLayout.SOUTH);
 		
 		JButton btnOK = new JButton("OK");
+		btnOK.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				getMainMenuCard();
+			}
+		});
 		panel_14.add(btnOK);
 		
 		panelMainMenu.setLayout(new BorderLayout(0, 0));
@@ -553,30 +575,36 @@ public class GUI extends JFrame {
 	private void createSaleOrder() throws DataAccessException {
 		String phone = textFieldPhone.getText();
 		SaleOrder saleOrder = saleOrderCtr.createSaleOrder(phone);
-		String fname = saleOrder.getCustomer().getFname();
-		String lname = saleOrder.getCustomer().getLname();
-		String address = saleOrder.getCustomer().getAddress();
-		String city = saleOrder.getCustomer().getCity();
-		int zipcode = saleOrder.getCustomer().getZipcode();
-		String email = saleOrder.getCustomer().getEmail();
-		String phoneNumber = saleOrder.getCustomer().getPhone();
-		String customerType = null;
-		if(saleOrder.getCustomer() instanceof PrivateCustomer) {
-			customerType = "Private customer";
+		if(saleOrder.getCustomer().getPhone() != null) {
+			String fname = saleOrder.getCustomer().getFname();
+			String lname = saleOrder.getCustomer().getLname();
+			String address = saleOrder.getCustomer().getAddress();
+			String city = saleOrder.getCustomer().getCity();
+			int zipcode = saleOrder.getCustomer().getZipcode();
+			String email = saleOrder.getCustomer().getEmail();
+			String phoneNumber = saleOrder.getCustomer().getPhone();
+			String customerType = null;
+			if(saleOrder.getCustomer() instanceof PrivateCustomer) {
+				customerType = "Private customer";
+			}
+			else if(saleOrder.getCustomer() instanceof BusinessCustomer) {
+				customerType = "Business customer";
+			}
+			textAreaCustomerInfo.setText("");
+			textAreaCustomerInfo.append("Name: " + fname + " " + lname);
+			textAreaCustomerInfo.append(" \n");
+			textAreaCustomerInfo.append("Email: " + email);
+			textAreaCustomerInfo.append(" \n");
+			textAreaCustomerInfo.append("Phone number: " + phoneNumber);
+			textAreaCustomerInfo.append(" \n");
+			textAreaCustomerInfo.append("Address: " + address + " " + zipcode + " " + city);
+			textAreaCustomerInfo.append(" \n");
+			textAreaCustomerInfo.append("Customer type: " + customerType);
 		}
-		else if(saleOrder.getCustomer() instanceof BusinessCustomer) {
-			customerType = "Business customer";
+		else {
+			textAreaCustomerInfo.setText("Error! No customer with that phone number");
 		}
-		textAreaCustomerInfo.setText("");
-		textAreaCustomerInfo.append("Name: " + fname + " " + lname);
-		textAreaCustomerInfo.append(" \n");
-		textAreaCustomerInfo.append("Email: " + email);
-		textAreaCustomerInfo.append(" \n");
-		textAreaCustomerInfo.append("Phone number: " + phoneNumber);
-		textAreaCustomerInfo.append(" \n");
-		textAreaCustomerInfo.append("Address: " + address + " " + zipcode + " " + city);
-		textAreaCustomerInfo.append(" \n");
-		textAreaCustomerInfo.append("Customer type: " + customerType);
+		
 	}
 	
 	/**
@@ -611,7 +639,9 @@ public class GUI extends JFrame {
 		boolean completed = saleOrderCtr.completeSaleOrder();
 		if(completed) {
 			textAreaCompletionInfo.append("Sale order completed successfully");
+			textAreaCompletionInfo.append(" \n");
 			textAreaCompletionInfo.append("Receipt has been printed");
+			textAreaCompletionInfo.append(" \n");
 		}
 		else {
 			textAreaCompletionInfo.append("Sale order completion failed. Start over.");
