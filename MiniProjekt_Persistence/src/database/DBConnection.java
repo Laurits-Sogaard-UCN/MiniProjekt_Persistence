@@ -57,6 +57,10 @@ public class DBConnection {
 		return connection;
 	}
 	
+	/**
+	 * Starts transaction by setting AutoCommit to false.
+	 * @throws DataAccessException
+	 */
 	public void startTransaction() throws DataAccessException {
 		try {
 			connection.setAutoCommit(false);
@@ -66,6 +70,10 @@ public class DBConnection {
 		}
 	}
 
+	/**
+	 * Commits transaction and sets AutoCommit to true.
+	 * @throws DataAccessException
+	 */
 	public void commitTransaction() throws DataAccessException {
 		try {
 			try {
@@ -81,6 +89,10 @@ public class DBConnection {
 		}
 	}
 
+	/**
+	 * Rolls back transaction and sets AutoCommit to true.
+	 * @throws DataAccessException
+	 */
 	public void rollbackTransaction() throws DataAccessException {
 		try {
 			try {

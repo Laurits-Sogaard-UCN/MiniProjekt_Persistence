@@ -19,10 +19,18 @@ public class SupplierDB implements SupplierDBIF {
 			+ "and a.Zipcode = ac.Zipcode");
 	private PreparedStatement findSupplierOnPhone;
 	
+	/**
+	 * Constructor to initialize instance variables.
+	 * @throws DataAccessException
+	 */
 	public SupplierDB() throws DataAccessException {
 		init();
 	}
 	
+	/**
+	 * Initialization of database connection and PreparedStatements.
+	 * @throws DataAccessException
+	 */
 	private void init() throws DataAccessException {
 		Connection con = DBConnection.getInstance().getConnection();
 		try {
@@ -32,6 +40,12 @@ public class SupplierDB implements SupplierDBIF {
 		}
 	}
 	
+	/**
+	 * Finds Supplier object on phone by executing query and building Supplier object.
+	 * @param phone
+	 * @return Supplier
+	 * @throws DataAccesException
+	 */
 	@Override
 	public Supplier findSupplierOnPhone(String phone) throws DataAccessException {
 		Supplier supplier = new Supplier();
@@ -47,6 +61,12 @@ public class SupplierDB implements SupplierDBIF {
 		return supplier;
 	}
 	
+	/**
+	 * Builds Supplier object from ResultSet.
+	 * @param rs
+	 * @return Supplier
+	 * @throws DataAccessException
+	 */
 	private Supplier buildObject(ResultSet rs) throws DataAccessException {
 		Supplier supplier = new Supplier();
 		try {

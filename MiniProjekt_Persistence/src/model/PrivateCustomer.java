@@ -5,6 +5,7 @@ public class PrivateCustomer extends Customer {
 	private int freeShipping;
 	
 	/**
+	 * Constructor to initialize instance variables.
 	 * @param fname
 	 * @param lname
 	 * @param address
@@ -21,19 +22,24 @@ public class PrivateCustomer extends Customer {
 		this.freeShipping = freeShipping;
 	}
 
+	/**
+	 * Constructor.
+	 */
 	public PrivateCustomer() {
 		super(null, null, null, 0, null, null, null, null);
 	}
 
 	/**
-	 * @return the freeShipping
+	 * Gets freeShipping.
+	 * @return int
 	 */
 	public int getFreeShipping() {
 		return freeShipping;
 	}
 
 	/**
-	 * @param freeShipping the freeShipping to set
+	 * Sets new freeShipping.
+	 * @param freeShipping
 	 */
 	public void setFreeShipping(int freeShipping) {
 		this.freeShipping = freeShipping;

@@ -6,6 +6,7 @@ public class BuyProduct extends Product {
 	private BuyProduct BuyProductType;
 	
 	/**
+	 * Constructor to initialize instance variables.
 	 * @param barcode
 	 * @param name
 	 * @param purchasePrice
@@ -26,29 +27,40 @@ public class BuyProduct extends Product {
 		BuyProductType = buyProductType;
 	}
 	
+	/**
+	 * Constructor.
+	 */
 	public BuyProduct() {
 		super(0, null, 0, null, 0, 0, 0, null, null);
 	}
+	
 	/**
-	 * @return the size
+	 * Gets amount.
+	 * @return amount
 	 */
 	public int getAmount() {
 		return amount;
 	}
+	
 	/**
-	 * @param size the size to set
+	 * Sets new amount.
+	 * @param amount
 	 */
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
+	
 	/**
-	 * @return the buyProductType
+	 * Gets buyProductType.
+	 * @return BuyProduct
 	 */
 	public BuyProduct getBuyProductType() {
 		return BuyProductType;
 	}
+	
 	/**
-	 * @param buyProductType the buyProductType to set
+	 * Sets new buyProductType.
+	 * @param buyProductType
 	 */
 	public void setBuyProductType(BuyProduct buyProductType) {
 		BuyProductType = buyProductType;

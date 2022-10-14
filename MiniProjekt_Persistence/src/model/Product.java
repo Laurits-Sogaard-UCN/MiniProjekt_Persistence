@@ -14,6 +14,7 @@ public class Product {
 	private Supplier supplier;
 	
 	/**
+	 * Constructor to initialize instance variables.
 	 * @param barcode
 	 * @param name
 	 * @param purchasePrice
@@ -38,131 +39,148 @@ public class Product {
 	}
 
 	/**
-	 * @return the barcode
+	 * Gets barcode.
+	 * @return int
 	 */
 	public int getBarcode() {
 		return barcode;
 	}
 
 	/**
-	 * @param barcode the barcode to set
+	 * Sets new barcode.
+	 * @param barcode
 	 */
 	public void setBarcode(int barcode) {
 		this.barcode = barcode;
 	}
 
 	/**
-	 * @return the name
+	 * Gets name.
+	 * @return String
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * @param name the name to set
+	 * Sets new name.
+	 * @param name
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
-	 * @return the purchasePrice
+	 * Gets purchasePrice.
+	 * @return double
 	 */
 	public double getPurchasePrice() {
 		return purchasePrice;
 	}
 
 	/**
-	 * @param purchasePrice the purchasePrice to set
+	 * Sets new purchasePrice.
+	 * @param purchasePrice
 	 */
 	public void setPurchasePrice(double purchasePrice) {
 		this.purchasePrice = purchasePrice;
 	}
 
 	/**
-	 * @return the countryOfOrigin
+	 * Gets countryOfOrigin.
+	 * @return String
 	 */
 	public String getCountryOfOrigin() {
 		return countryOfOrigin;
 	}
 
 	/**
-	 * @param countryOfOrigin the countryOfOrigin to set
+	 * Sets new countryOfOrigin.
+	 * @param countryOfOrigin
 	 */
 	public void setCountryOfOrigin(String countryOfOrigin) {
 		this.countryOfOrigin = countryOfOrigin;
 	}
 
 	/**
-	 * @return the minStock
+	 * Gets minStock.
+	 * @return int
 	 */
 	public int getMinStock() {
 		return minStock;
 	}
 
 	/**
-	 * @param minStock the minStock to set
+	 * Sets new minStock.
+	 * @param minStock
 	 */
 	public void setMinStock(int minStock) {
 		this.minStock = minStock;
 	}
 
 	/**
-	 * @return the currentStock
+	 * Gets currentStock.
+	 * @return int
 	 */
 	public int getCurrentStock() {
 		return currentStock;
 	}
 
 	/**
-	 * @param currentStock the currentStock to set
+	 * Sets new currentStock.
+	 * @param currentStock
 	 */
 	public void setCurrentStock(int currentStock) {
 		this.currentStock = currentStock;
 	}
 
 	/**
-	 * @return the salesPrice
+	 * Gets salesPrice.
+	 * @return double
 	 */
 	public double getSalesPrice() {
 		return salesPrice;
 	}
 
 	/**
-	 * @param salesPrice the salesPrice to set
+	 * Sets new salesPrice.
+	 * @param salesPrice
 	 */
 	public void setSalesPrice(double salesPrice) {
 		this.salesPrice = salesPrice;
 	}
 	
 	/**
-	 * @return the productType
+	 * Gets productType.
+	 * @return Product
 	 */
 	public Product getProductType() {
 		return productType;
 	}
 
 	/**
-	 * @param productType the productType to set
+	 * Sets new productType.
+	 * @param productType
 	 */
 	public void setProductType(Product productType) {
 		this.productType = productType;
 	}
 
 	/**
-	 * @return the supplier
+	 * Gets supplier.
+	 * @return Supplier
 	 */
 	public Supplier getSupplier() {
 		return supplier;
 	}
 
 	/**
-	 * @param supplier the supplier to set
+	 * Sets new supplier.
+	 * @param supplier
 	 */
 	public void setSupplier(Supplier supplier) {
 		this.supplier = supplier;
 	}
-	
 	
 	
 }

@@ -7,6 +7,7 @@ public class Orderline {
 	private SaleOrder saleOrder;
 	
 	/**
+	 * Constructor to initialize instance variables.
 	 * @param buyProduct
 	 * @param quantity
 	 * @param saleOrder
@@ -18,39 +19,51 @@ public class Orderline {
 	}
 	
 	/**
-	 * @return the buyProduct
+	 * Gets buyProduct.
+	 * @return BuyProduct
 	 */
 	public BuyProduct getBuyProduct() {
 		return buyProduct;
 	}
+	
 	/**
-	 * @param buyProduct the buyProduct to set
+	 * Sets new buyProduct.
+	 * @param buyProduct
 	 */
 	public void setBuyProduct(BuyProduct buyProduct) {
 		this.buyProduct = buyProduct;
 	}
+	
 	/**
-	 * @return the quantity
+	 * Gets quantity.
+	 * @return int
 	 */
 	public int getQuantity() {
 		return quantity;
 	}
+	
 	/**
-	 * @param quantity the quantity to set
+	 * Sets new quantity.
+	 * @param quantity
 	 */
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+	
 	/**
-	 * @return the saleOrder
+	 * Gets saleOrder.
+	 * @return SaleOrder
 	 */
 	public SaleOrder getSaleOrder() {
 		return saleOrder;
 	}
+	
 	/**
-	 * @param saleOrder the saleOrder to set
+	 * Sets new saleOrder.
+	 * @param saleOrder
 	 */
 	public void setSaleOrder(SaleOrder saleOrder) {
 		this.saleOrder = saleOrder;
 	}
+	
 }

@@ -16,18 +16,9 @@ import utility.DataAccessException;
 
 public class SaleOrderDB implements SaleOrderDBIF {
 	
-	private static final String FIND_CUSTOMER_BY_PHONE = ("SELECT *\r\n"
-			+ "FROM Person p, Customer c\r\n"
-			+ "WHERE p.Phone = ?\r\n"
-			+ "and p.Phone = c.Phone");
-	private PreparedStatement findCustomerByPhone;
-	
 	private static final String INSERT_SALE_ORDER = ("INSERT INTO SaleOrder (Date, Total, DeliveryStatus, DeliveryDate, CustomerPhone, EmployeePhone) \r\n"
 			+ "VALUES (?, ?, ?, ?, ?, ?)");
 	private PreparedStatement insertSaleOrder;
-	
-	private static final String GET_MOST_RECENT_IDENTITY = ("SELECT SCOPE_IDENTITY() AS [ID];");
-	private PreparedStatement getMostRecentIdentity;
 	
 	private static final String INSERT_ORDERLINE = ("INSERT INTO Orderline (Quantity, SaleOrderID, BuyProductBarcode)\r\n"
 			+ "VALUES (?, ?, ?)");
@@ -48,9 +39,7 @@ public class SaleOrderDB implements SaleOrderDBIF {
 	private void init() throws DataAccessException {
 		Connection con = DBConnection.getInstance().getConnection();
 		try {
-			findCustomerByPhone = con.prepareStatement(FIND_CUSTOMER_BY_PHONE);
 			insertSaleOrder = con.prepareStatement(INSERT_SALE_ORDER, PreparedStatement.RETURN_GENERATED_KEYS);
-			getMostRecentIdentity = con.prepareStatement(GET_MOST_RECENT_IDENTITY);
 			insertOrderline = con.prepareStatement(INSERT_ORDERLINE);
 		} catch(SQLException e) {
 			throw new DataAccessException("Could not prepare statement", e);
@@ -58,8 +47,7 @@ public class SaleOrderDB implements SaleOrderDBIF {
 	}
 	
 	/**
-	 * Creates a SaleOrder by executing query and building a
-	 * SaleOrder Object (done by internal method call).
+	 * Creates a SaleOrder object.
 	 */
 	@Override
 	public SaleOrder createSaleOrder() {
@@ -73,6 +61,12 @@ public class SaleOrderDB implements SaleOrderDBIF {
 		return saleOrder;
 	}
 	
+	/**
+	 * Inserts data from SaleOrder object, and its Orderline objects, into database.
+	 * @param saleOrder
+	 * @return boolean
+	 * @throws DataAccessException
+	 */
 	@Override
 	public boolean completeSaleOrder(SaleOrder saleOrder) throws DataAccessException {
 		boolean completed = false;
@@ -84,9 +78,9 @@ public class SaleOrderDB implements SaleOrderDBIF {
 		double total = saleOrder.getTotal();
 		String deliveryStatus = saleOrder.getDeliveryStatus();
 		LocalDate localDeliveryDate = saleOrder.getDeliveryDate();
-		Date deliveryDate = null;
+		java.sql.Date deliveryDate = null;
 		if(localDeliveryDate != null) {
-			deliveryDate = Date.from(localDeliveryDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+			deliveryDate = java.sql.Date.valueOf(localDeliveryDate);
 		}
 		String customerPhone = saleOrder.getCustomer().getPhone();
 		String employeePhone = saleOrder.getEmployee().getPhone();
@@ -95,7 +89,7 @@ public class SaleOrderDB implements SaleOrderDBIF {
 			insertSaleOrder.setDate(1, date);
 			insertSaleOrder.setDouble(2, total);
 			insertSaleOrder.setString(3, deliveryStatus);
-			insertSaleOrder.setDate(4, (java.sql.Date) deliveryDate);
+			insertSaleOrder.setDate(4, deliveryDate);
 			insertSaleOrder.setString(5, customerPhone);
 			insertSaleOrder.setString(6, employeePhone);
 			
@@ -126,25 +120,5 @@ public class SaleOrderDB implements SaleOrderDBIF {
 		return completed;
 	}
 	
-//	/**
-//	 * Builds SaleOrder object from ResultSet.
-//	 * @param rs
-//	 * @return SaleOrder
-//	 * @throws DataAccessException
-//	 */
-//	private SaleOrder buildObject(ResultSet rs) throws DataAccessException {
-//		SaleOrder saleOrder = new SaleOrder();
-//		try {
-//			saleOrder.setDate(rs.getDate("Date").toLocalDate());
-//			saleOrder.setDeliveryStatus(rs.getString("DeliveryStatus"));
-//			saleOrder.setDeliveryDate(rs.getDate("DeliveryDate").toLocalDate());
-//			saleOrder.setTotal(rs.getFloat("Total"));
-//			saleOrder.setCustomer(new Customer(rs.getString("CustomerPhone")));
-//			saleOrder.setEmployee(new Employee(rs.getString("EmployeePhone")));
-//		} catch(SQLException e) {
-//			throw new DataAccessException("Could not build object", e);
-//		}
-//		return saleOrder;
-//	}
 
 }

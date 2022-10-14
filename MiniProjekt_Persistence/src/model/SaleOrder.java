@@ -12,7 +12,9 @@ public class SaleOrder {
 	private Customer customer;
 	private Employee employee;
 	private ArrayList<Orderline> orderlines;
+	
 	/**
+	 * Constructor to initialize instance variables.
 	 * @param date
 	 * @param total
 	 * @param deliveryStatus
@@ -32,91 +34,133 @@ public class SaleOrder {
 		this.orderlines = new ArrayList<>();
 	}
 	
+	/**
+	 * Constructor.
+	 */
 	public SaleOrder() {
 		this.orderlines = new ArrayList<>();
 	}
+	
 	/**
-	 * @return the date
+	 * Gets date.
+	 * @return LocalDate
 	 */
 	public LocalDate getDate() {
 		return date;
 	}
+	
 	/**
-	 * @param date the date to set
+	 * Sets new date.
+	 * @param date
 	 */
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
+	
 	/**
-	 * @return the total
+	 * Gets total.
+	 * @return double
 	 */
 	public double getTotal() {
 		return total;
 	}
+	
 	/**
-	 * @param total the total to set
+	 * Sets new total.
+	 * @param total
 	 */
 	public void setTotal(double total) {
 		this.total = total;
 	}
+	
 	/**
-	 * @return the deliveryStatus
+	 * Gets deliveryStatus.
+	 * @return String
 	 */
 	public String getDeliveryStatus() {
 		return deliveryStatus;
 	}
+	
 	/**
-	 * @param deliveryStatus the deliveryStatus to set
+	 * Sets new deliveryStatus.
+	 * @param deliveryStatus
 	 */
 	public void setDeliveryStatus(String deliveryStatus) {
 		this.deliveryStatus = deliveryStatus;
 	}
+	
 	/**
-	 * @return the deliveryDate
+	 * Gets deliveryDate.
+	 * @return LocalDate
 	 */
 	public LocalDate getDeliveryDate() {
 		return deliveryDate;
 	}
+	
 	/**
-	 * @param deliveryDate the deliveryDate to set
+	 * Sets new deliveryDate.
+	 * @param deliveryDate
 	 */
 	public void setDeliveryDate(LocalDate deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
+	
 	/**
-	 * @return the customer
+	 * Gets customer.
+	 * @return Customer
 	 */
 	public Customer getCustomer() {
 		return customer;
 	}
+	
 	/**
-	 * @param customer the customer to set
+	 * Sets new customer.
+	 * @param customer
 	 */
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
+	
 	/**
-	 * @return the employee
+	 * Gets employee.
+	 * @return Employee
 	 */
 	public Employee getEmployee() {
 		return employee;
 	}
+	
 	/**
-	 * @param employee the employee to set
+	 * Sets new employee.
+	 * @param employee
 	 */
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
 	
+	/**
+	 * Creates new Orderline object.
+	 * @param buyProduct
+	 * @param quantity
+	 * @param saleOrder
+	 * @return Orderline
+	 */
 	public Orderline createOrderline(BuyProduct buyProduct, int quantity, SaleOrder saleOrder) {
 		Orderline orderline = new Orderline(buyProduct, quantity, saleOrder);
 		return orderline;
 	}
 	
+	/**
+	 * Adds Orderline object to ArrayList of Orderlines.
+	 * @param ol
+	 */
 	public void addOrderline(Orderline ol) {
 		orderlines.add(ol);
 	}
 	
+	/**
+	 * Gets ArrayList of Orderlines. 
+	 * @return ArrayList<Orderline>
+	 */
 	public ArrayList<Orderline> getOrderlines() {
 		return orderlines;
 	}

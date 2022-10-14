@@ -33,7 +33,7 @@ public class SaleOrderController {
 	}
 	
 	/**
-	 * Create SaleOrder object containing a Customer and Employee object.
+	 * Creates a SaleOrder object containing a Customer and Employee object.
 	 * @param phone
 	 * @return SaleOrder
 	 * @throws DataAccessException
@@ -47,6 +47,14 @@ public class SaleOrderController {
 		return saleOrder;
 	}
 	
+	/**
+	 * Adds an Orderline object containing a Product to SaleOrder object.
+	 * Calculates total on SaleOrder object.
+	 * @param barcode
+	 * @param quantity
+	 * @return SaleOrder
+	 * @throws DataAccessException
+	 */
 	public SaleOrder addProduct(int barcode, int quantity) throws DataAccessException {
 		BuyProduct product = productCtr.findBuyProductOnBarcode(barcode, quantity);
 		Supplier supplier = supplierCtr.findSupplierOnPhone(product.getSupplier().getPhone());
@@ -57,6 +65,11 @@ public class SaleOrderController {
 		return this.saleOrder;
 	}
 	
+	/**
+	 * Completes saleOrder by adding the SaleOrder objects data to database.
+	 * @return boolean
+	 * @throws DataAccessException
+	 */
 	public boolean completeSaleOrder() throws DataAccessException {
 		boolean completed = false;
 		if(saleOrderDB.completeSaleOrder(this.saleOrder)) {
@@ -65,6 +78,10 @@ public class SaleOrderController {
 		return completed;
 	}
 	
+	/**
+	 * Calculates total on SaleOrder object.
+	 * @return double
+	 */
 	private double calculateTotal() {
 		double total = 0;
 		for(Orderline element : this.saleOrder.getOrderlines()) {

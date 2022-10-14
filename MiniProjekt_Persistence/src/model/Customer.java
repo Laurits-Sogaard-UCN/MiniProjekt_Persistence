@@ -5,6 +5,7 @@ public class Customer extends Person {
 	private Customer customerType;
 
 	/**
+	 * Constructor to initialize instance variables.
 	 * @param fname
 	 * @param lname
 	 * @param address
@@ -20,30 +21,36 @@ public class Customer extends Person {
 		this.customerType = customerType;
 	}
 
+	/**
+	 * Constructor.
+	 * @param phone
+	 */
 	public Customer(String phone) {
 		super(null, null, null, 0, null, phone, null);
 	}
 	
+	/**
+	 * Constructor.
+	 */
 	public Customer() {
 		super(null, null, null, 0, null, null, null);
 	}
 
 	/**
-	 * @return the customerType
+	 * Gets customerType.
+	 * @return Customer
 	 */
 	public Customer getCustomerType() {
 		return customerType;
 	}
 
 	/**
-	 * @param customerType the customerType to set
+	 * Sets new customerType.
+	 * @param customerType
 	 */
 	public void setCustomerType(Customer customerType) {
 		this.customerType = customerType;
 	}
-	
-	
-
 	
 
 }

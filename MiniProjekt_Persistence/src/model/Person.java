@@ -11,6 +11,7 @@ public class Person {
 	private String email;
 		
 	/**
+	 * Constructor to initialize instance variables.
 	 * @param fname
 	 * @param lname
 	 * @param address
@@ -30,100 +31,117 @@ public class Person {
 		this.email = email;
 	}
 	
-	
 	/**
-	 * @return the fname
+	 * Gets fname.
+	 * @return String
 	 */
 	public String getFname() {
 		return fname;
 	}
 
-
 	/**
-	 * @param fname the fname to set
+	 * Sets new fname.
+	 * @param fname
 	 */
 	public void setFname(String fname) {
 		this.fname = fname;
 	}
 
-
 	/**
-	 * @return the lname
+	 * Gets lname.
+	 * @return String
 	 */
 	public String getLname() {
 		return lname;
 	}
 
-
 	/**
-	 * @param lname the lname to set
+	 * Sets new lname.
+	 * @param lname
 	 */
 	public void setLname(String lname) {
 		this.lname = lname;
 	}
 
-
 	/**
-	 * @return the address
+	 * Gets address.
+	 * @return String
 	 */
 	public String getAddress() {
 		return address;
 	}
+	
 	/**
-	 * @param address the address to set
+	 * Sets new address.
+	 * @param address
 	 */
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	
 	/**
-	 * @return the zipcode
+	 * Gets zipcode.
+	 * @return int
 	 */
 	public int getZipcode() {
 		return zipcode;
 	}
+	
 	/**
-	 * @param zipcode the zipcode to set
+	 * Sets new zipcode.
+	 * @param zipcode
 	 */
 	public void setZipcode(int zipcode) {
 		this.zipcode = zipcode;
 	}
+	
 	/**
-	 * @return the city
+	 * Gets city.
+	 * @return String
 	 */
 	public String getCity() {
 		return city;
 	}
+	
 	/**
-	 * @param city the city to set
+	 * Sets new city.
+	 * @param city
 	 */
 	public void setCity(String city) {
 		this.city = city;
 	}
+	
 	/**
-	 * @return the phone
+	 * Gets phone.
+	 * @return String
 	 */
 	public String getPhone() {
 		return phone;
 	}
+	
 	/**
-	 * @param phone the phone to set
+	 * Sets new phone.
+	 * @param phone
 	 */
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	
 	/**
-	 * @return the email
+	 * Gets email.
+	 * @return String
 	 */
 	public String getEmail() {
 		return email;
 	}
+	
 	/**
-	 * @param email the email to set
+	 * Sets new email.
+	 * @param email
 	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
 	
 
 }

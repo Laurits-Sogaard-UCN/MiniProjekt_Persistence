@@ -396,6 +396,7 @@ public class GUI extends JFrame {
 	
 	/**
 	 * Creates a SaleOrder object containing a Customer and Employee object.
+	 * Prints info on Customer.
 	 * @throws DataAccessException
 	 */
 	private void createSaleOrder() throws DataAccessException {
@@ -406,6 +407,11 @@ public class GUI extends JFrame {
 		textAreaCustomerInfo.setText("Name: " + fname + " " + lname);
 	}
 	
+	/**
+	 * Adds Orderline object containing a Product to SaleOrder object.
+	 * Prints info on Product and SaleOrder total.
+	 * @throws DataAccessException
+	 */
 	private void addProduct() throws DataAccessException {
 		String barcodeInput = textFieldBarcode.getText();
 		int barcode = Integer.parseInt(barcodeInput);
@@ -420,6 +426,11 @@ public class GUI extends JFrame {
 		textAreaProductsInfo.append("Total: " + saleOrder.getTotal());
 	}
 	
+	/**
+	 * Completes SaleOrder by saving SaleOrder objects data in database.
+	 * Prints confirmation.
+	 * @throws DataAccessException
+	 */
 	private void completeSaleOrder() throws DataAccessException {
 		boolean completed = saleOrderCtr.completeSaleOrder();
 		if(completed) {

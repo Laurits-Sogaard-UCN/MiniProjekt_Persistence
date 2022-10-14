@@ -7,6 +7,7 @@ public class BusinessCustomer extends Customer {
 	private int discount;
 	
 	/**
+	 * Constructor to initialize instance variables.
 	 * @param fname
 	 * @param lname
 	 * @param address
@@ -27,47 +28,56 @@ public class BusinessCustomer extends Customer {
 		this.discount = discount;
 	}
 
+	/**
+	 * Constructor.
+	 */
 	public BusinessCustomer() {
 		super(null, null, null, 0, null, null, null, null);
 	}
 
 	/**
-	 * @return the businessName
+	 * Gets businessName.
+	 * @return String
 	 */
 	public String getBusinessName() {
 		return businessName;
 	}
 
 	/**
-	 * @param businessName the businessName to set
+	 * Sets new businessName.
+	 * @param businessName
 	 */
 	public void setBusinessName(String businessName) {
 		this.businessName = businessName;
 	}
 
 	/**
-	 * @return the cVR
+	 * Gets CVR.
+	 * @return int
 	 */
 	public int getCVR() {
 		return CVR;
 	}
 
 	/**
-	 * @param cVR the cVR to set
+	 * Sets new CVR.
+	 * @param CVR
 	 */
-	public void setCVR(int cVR) {
-		CVR = cVR;
+	public void setCVR(int CVR) {
+		this.CVR = CVR;
 	}
 
 	/**
-	 * @return the discount
+	 * Gets discount.
+	 * @return int
 	 */
 	public int getDiscount() {
 		return discount;
 	}
 
 	/**
-	 * @param discount the discount to set
+	 * Sets new discount.
+	 * @param discount
 	 */
 	public void setDiscount(int discount) {
 		this.discount = discount;

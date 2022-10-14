@@ -29,10 +29,18 @@ public class ProductDB implements ProductDBIF {
 			+ "WHERE p.Barcode = ?");
 	private PreparedStatement findCurrentStock;
 	
+	/**
+	 * Constructor to initialize instance variables.
+	 * @throws DataAccessException
+	 */
 	public ProductDB() throws DataAccessException {
 		init();
 	}
 	
+	/**
+	 * Initialization of Connection and PreparedStatements.
+	 * @throws DataAccessException
+	 */
 	private void init() throws DataAccessException {
 		Connection con = DBConnection.getInstance().getConnection();
 		try {
@@ -44,6 +52,14 @@ public class ProductDB implements ProductDBIF {
 		}
 	}
 	
+	/**
+	 * Finds BuyProduct on barcode by executing ResultSet and building
+	 * a BuyProduct object (internal method call). Updates currentStock.
+	 * @param barcode
+	 * @param quantity
+	 * @return BuyProduct
+	 * @throws DataAccessException
+	 */
 	@Override
 	public BuyProduct findBuyProductOnBarcode(int barcode, int quantity) throws DataAccessException {
 		BuyProduct buyProduct = new BuyProduct();
@@ -72,6 +88,12 @@ public class ProductDB implements ProductDBIF {
 		return buyProduct;
 	}
 	
+	/**
+	 * Builds a subtype of BuyProduct depending on value of coloumn "BuyProductType".
+	 * @param rs
+	 * @return BuyProduct
+	 * @throws DataAccessException
+	 */
 	private BuyProduct buildBuyProductObject(ResultSet rs) throws DataAccessException {
 		BuyProduct buyProduct = null;
 		try {
@@ -80,12 +102,10 @@ public class ProductDB implements ProductDBIF {
 				buyProduct = buildClothingObject(rs);
 			}
 			else if(rs.getString("BuyProductType").equals("Equipment")) {
-				//TODO
-				buildEquipmentObject(rs);
+				//TODO buildEquipmentObject(rs);
 			}
 			else if(rs.getString("BuyProductType").equals("GunReplica")) {
-				//TODO
-				buildGunReplicaObject(rs);
+				//TODO buildGunReplicaObject(rs);
 			}
 		} catch(SQLException e) {
 			throw new DataAccessException("Could not build object", e);
@@ -93,6 +113,12 @@ public class ProductDB implements ProductDBIF {
 		return buyProduct;
 	}
 	
+	/**
+	 * Builds a Clothing object from ResultSet.
+	 * @param rs
+	 * @return Clothing
+	 * @throws DataAccessException
+	 */
 	private Clothing buildClothingObject(ResultSet rs) throws DataAccessException {
 		Clothing buyProduct = new Clothing();
 		try {
@@ -113,14 +139,6 @@ public class ProductDB implements ProductDBIF {
 			throw new DataAccessException("Could not build object", e);
 		}
 		return buyProduct;
-	}
-	
-	private void buildEquipmentObject(ResultSet rs) {
-		//TODO
-	}
-	
-	private void buildGunReplicaObject(ResultSet rs) {
-		//TODO
 	}
 	
 	

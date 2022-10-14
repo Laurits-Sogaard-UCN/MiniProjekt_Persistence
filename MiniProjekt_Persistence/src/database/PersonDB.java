@@ -68,7 +68,7 @@ public class PersonDB implements PersonDBIF {
 	/**
 	 * Builds a PrivateCustomer object from ResultSet.
 	 * @param rs
-	 * @return Customer
+	 * @return PrivateCustomer
 	 * @throws DataAccessException
 	 */
 	private PrivateCustomer buildPrivateCustomerObject(ResultSet rs) throws DataAccessException {
@@ -92,31 +92,25 @@ public class PersonDB implements PersonDBIF {
 	/**
 	 * Builds a BusinessCustomer object from ResultSet.
 	 * @param rs
-	 * @return Customer
+	 * @return BusinessCustomer
 	 * @throws DataAccessException
 	 */
 	private BusinessCustomer buildBusinessCustomerObject(ResultSet rs) throws DataAccessException {
 		BusinessCustomer businessCustomer = new BusinessCustomer();
 		try {
-			if(rs.getString("CustomerType").equals("Private")) {
-				try {
-					businessCustomer.setFname(rs.getString("Fname"));
-					businessCustomer.setLname(rs.getString("Lname"));
-					businessCustomer.setAddress(rs.getInt("Street") + " " + rs.getString("StreetNumber"));
-					businessCustomer.setZipcode(rs.getInt("Zipcode"));
-					businessCustomer.setCity(rs.getString("City"));
-					businessCustomer.setEmail(rs.getString("Email"));
-					businessCustomer.setPhone(rs.getString("Phone"));
-					businessCustomer.setCustomerType(businessCustomer);
-					businessCustomer.setDiscount(rs.getInt("Discount"));
-					businessCustomer.setBusinessName(rs.getString("BusinessName"));
-					businessCustomer.setCVR(rs.getInt("CVR"));
-				} catch(SQLException e) {
-					throw new DataAccessException("Could not build object", e);
-				}
-			}
+			businessCustomer.setFname(rs.getString("Fname"));
+			businessCustomer.setLname(rs.getString("Lname"));
+			businessCustomer.setAddress(rs.getString("Street") + " " + rs.getInt("StreetNumber"));
+			businessCustomer.setZipcode(rs.getInt("Zipcode"));
+			businessCustomer.setCity(rs.getString("City"));
+			businessCustomer.setEmail(rs.getString("Email"));
+			businessCustomer.setPhone(rs.getString("Phone"));
+			businessCustomer.setCustomerType(businessCustomer);
+			businessCustomer.setDiscount(rs.getInt("Discount"));
+			businessCustomer.setBusinessName(rs.getString("BusinessName"));
+			businessCustomer.setCVR(rs.getInt("CVR"));
 		} catch(SQLException e) {
-			throw new DataAccessException("", e);
+			throw new DataAccessException("Could not build object", e);
 		}
 		return businessCustomer;
 	}

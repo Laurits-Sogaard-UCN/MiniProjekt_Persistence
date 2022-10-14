@@ -10,8 +10,8 @@ public class Supplier {
 	private String country;
 	private String email;
 	
-	
 	/**
+	 * Constructor to initialize instance variables.
 	 * @param phone
 	 * @param name
 	 * @param address
@@ -31,113 +31,132 @@ public class Supplier {
 		this.email = email;
 	}
 
+	/**
+	 * Constructor.
+	 * @param phone
+	 */
 	public Supplier(String phone) {
 		this.phone = phone;
 	}
 	
+	/**
+	 * Constructor.
+	 */
 	public Supplier() {
 		
 	}
 
 	/**
-	 * @return the phone
+	 * Gets phone.
+	 * @return String
 	 */
 	public String getPhone() {
 		return phone;
 	}
 
 	/**
-	 * @param phone the phone to set
+	 * Sets new phone.
+	 * @param phone
 	 */
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
 	/**
-	 * @return the name
+	 * Gets name.
+	 * @return String
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * @param name the name to set
+	 * Sets new name.
+	 * @param name
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
-	 * @return the address
+	 * Gets address.
+	 * @return String
 	 */
 	public String getAddress() {
 		return address;
 	}
 
 	/**
-	 * @param address the address to set
+	 * Sets new address.
+	 * @param address
 	 */
 	public void setAddress(String address) {
 		this.address = address;
 	}
 
 	/**
-	 * @return the zipcode
+	 * Gets zipcode.
+	 * @return int
 	 */
 	public int getZipcode() {
 		return zipcode;
 	}
 
 	/**
-	 * @param zipcode the zipcode to set
+	 * Sets new zipcode.
+	 * @param zipcode
 	 */
 	public void setZipcode(int zipcode) {
 		this.zipcode = zipcode;
 	}
 
 	/**
-	 * @return the city
+	 * Gets city.
+	 * @return String
 	 */
 	public String getCity() {
 		return city;
 	}
 
 	/**
-	 * @param city the city to set
+	 * Sets new city.
+	 * @param city 
 	 */
 	public void setCity(String city) {
 		this.city = city;
 	}
 
 	/**
-	 * @return the country
+	 * Gets country.
+	 * @return String
 	 */
 	public String getCountry() {
 		return country;
 	}
 
 	/**
-	 * @param country the country to set
+	 * Sets new country.
+	 * @param country
 	 */
 	public void setCountry(String country) {
 		this.country = country;
 	}
 
 	/**
-	 * @return the email
+	 * Gets email.
+	 * @return String
 	 */
 	public String getEmail() {
 		return email;
 	}
 
 	/**
-	 * @param email the email to set
+	 * Sets new email.
+	 * @param email
 	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
 	
 	
 }
