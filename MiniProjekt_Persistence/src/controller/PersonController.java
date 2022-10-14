@@ -1,7 +1,7 @@
 package controller;
 
-import database.CustomerDB;
-import database.CustomerDBIF;
+import database.PersonDB;
+import database.PersonDBIF;
 import model.Customer;
 import model.Employee;
 import utility.DataAccessException;
@@ -9,14 +9,14 @@ import utility.DataAccessException;
 public class PersonController {
 	
 	private Employee employee;
-	private CustomerDBIF customerDB;
+	private PersonDBIF personDB;
 	
 	/**
 	 * Constructor to initialize instance variables.
 	 * @throws DataAccessException
 	 */
 	public PersonController() throws DataAccessException {
-		customerDB = new CustomerDB();
+		personDB = new PersonDB();
 		this.employee = new Employee("Bo", "Hansen", "Vej 1", 9000, "Aalborg", "+4512345678", "mail.bo", 1234567890);
 	}
 	
@@ -35,7 +35,7 @@ public class PersonController {
 	 * @throws DataAccessException
 	 */
 	public Customer findCustomerByPhone(String phone) throws DataAccessException {
-		Customer customer = customerDB.findCustomerByPhone(phone);
+		Customer customer = personDB.findCustomerByPhone(phone);
 		return customer;
 	}
 

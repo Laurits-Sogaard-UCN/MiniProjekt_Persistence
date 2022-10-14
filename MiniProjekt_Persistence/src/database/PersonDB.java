@@ -10,7 +10,7 @@ import model.Customer;
 import model.PrivateCustomer;
 import utility.DataAccessException;
 
-public class CustomerDB implements CustomerDBIF {
+public class PersonDB implements PersonDBIF {
 	
 	private static final String FIND_CUSTOMER_BY_PHONE = ("");
 	private PreparedStatement findCustomerByPhone;
@@ -19,7 +19,7 @@ public class CustomerDB implements CustomerDBIF {
 	 * Constructor to initialize instance variables.
 	 * @throws DataAccessException
 	 */
-	public CustomerDB() throws DataAccessException {
+	public PersonDB() throws DataAccessException {
 		init();
 	}
 	
@@ -47,10 +47,10 @@ public class CustomerDB implements CustomerDBIF {
 			findCustomerByPhone.setString(1, phone);
 			ResultSet rs = findCustomerByPhone.executeQuery();
 			if(rs.next() && rs.getString("CustomerType").equals("Private")) {
-				customer = buildPrivateObject(rs);
+				customer = buildPrivateCustomerObject(rs);
 			}
 			else if(rs.next() && rs.getString("CustomerType").equals("Business")) {
-				customer = buildBusinessObject(rs);
+				customer = buildBusinessCustomerObject(rs);
 			}
 		} catch(SQLException e) {
 			throw new DataAccessException("Could not build object", e);
@@ -64,7 +64,7 @@ public class CustomerDB implements CustomerDBIF {
 	 * @return Customer
 	 * @throws DataAccessException
 	 */
-	public Customer buildPrivateObject(ResultSet rs) throws DataAccessException {
+	private Customer buildPrivateCustomerObject(ResultSet rs) throws DataAccessException {
 		PrivateCustomer privateCustomer = (PrivateCustomer) new Customer();
 		try {
 			if(rs.getString("CustomerType").equals("Private")) {
@@ -94,7 +94,7 @@ public class CustomerDB implements CustomerDBIF {
 	 * @return Customer
 	 * @throws DataAccessException
 	 */
-	public Customer buildBusinessObject(ResultSet rs) throws DataAccessException {
+	private Customer buildBusinessCustomerObject(ResultSet rs) throws DataAccessException {
 		BusinessCustomer businessCustomer = (BusinessCustomer) new Customer();
 		try {
 			if(rs.getString("CustomerType").equals("Private")) {
