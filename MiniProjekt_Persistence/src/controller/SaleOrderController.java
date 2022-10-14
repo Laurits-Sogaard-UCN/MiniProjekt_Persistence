@@ -4,6 +4,8 @@ import database.SaleOrderDB;
 import database.SaleOrderDBIF;
 import model.Customer;
 import model.Employee;
+import model.Orderline;
+import model.Product;
 import model.SaleOrder;
 import utility.DataAccessException;
 
@@ -36,6 +38,12 @@ public class SaleOrderController {
 		this.saleOrder.setEmployee(employee);
 		this.saleOrder.setCustomer(customer);
 		return saleOrder;
+	}
+	
+	public SaleOrder addProduct(int barcode, int quantity) {
+		Product product = productCtr.findProductOnBarcode(barcode, quantity);
+		Orderline orderline = saleOrder.createOrderline(product, quantity, this.saleOrder);
+		this.saleOrder.addOrderline(orderline);
 	}
 
 }

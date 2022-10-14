@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class SaleOrder {
 	
@@ -10,6 +11,7 @@ public class SaleOrder {
 	private LocalDate deliveryDate;
 	private Customer customer;
 	private Employee employee;
+	private ArrayList<Orderline> orderlines;
 	/**
 	 * @param date
 	 * @param total
@@ -27,6 +29,7 @@ public class SaleOrder {
 		this.deliveryDate = deliveryDate;
 		this.customer = customer;
 		this.employee = employee;
+		this.orderlines = new ArrayList<>();
 	}
 	
 	public SaleOrder() {
@@ -103,6 +106,14 @@ public class SaleOrder {
 	 */
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
+	}
+	
+	public void addOrderline(Orderline ol) {
+		orderlines.add(ol);
+	}
+	
+	public ArrayList<Orderline> getOrderlines() {
+		return orderlines;
 	}
 	
 	
