@@ -35,13 +35,6 @@ public class BusinessCustomer extends Customer {
 		super(null, null, null, 0, null, null, null, null);
 	}
 
-	/**
-	 * Gets businessName.
-	 * @return String
-	 */
-	public String getBusinessName() {
-		return businessName;
-	}
 
 	/**
 	 * Sets new businessName.
@@ -51,14 +44,7 @@ public class BusinessCustomer extends Customer {
 		this.businessName = businessName;
 	}
 
-	/**
-	 * Gets CVR.
-	 * @return int
-	 */
-	public int getCVR() {
-		return CVR;
-	}
-
+	
 	/**
 	 * Sets new CVR.
 	 * @param CVR

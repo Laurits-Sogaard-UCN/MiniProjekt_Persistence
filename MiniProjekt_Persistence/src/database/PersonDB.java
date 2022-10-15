@@ -12,7 +12,7 @@ import utility.DataAccessException;
 
 public class PersonDB implements PersonDBIF {
 	
-	private static final String FIND_PRIVATE_CUSTOMER_BY_PHONE = ("SELECT p.*, c.*, d.Discount, a.*, ac.City\r\n"
+	private static final String FIND_PRIVATE_CUSTOMER_ON_PHONE = ("SELECT p.*, c.*, d.Discount, a.*, ac.City\r\n"
 			+ "FROM Person p, Customer c, PrivateCustomer pc, Discount d, Address a, AddressCity ac\r\n"
 			+ "WHERE p.Phone = ?\r\n"
 			+ "and p.Phone = c.Phone\r\n"
@@ -20,9 +20,9 @@ public class PersonDB implements PersonDBIF {
 			+ "and d.ID = pc.DiscountID\r\n"
 			+ "and p.AddressID = a.ID\r\n"
 			+ "and a.Zipcode = ac.Zipcode");
-	private PreparedStatement findPrivateCustomerByPhone;
+	private PreparedStatement findPrivateCustomerOnPhone;
 	
-	private static final String FIND_BUSINESS_CUSTOMER_BY_PHONE = ("SELECT p.*, bc.*, c.*, d.Discount, a.*, ac.City\r\n"
+	private static final String FIND_BUSINESS_CUSTOMER_ON_PHONE = ("SELECT p.*, bc.*, c.*, d.Discount, a.*, ac.City\r\n"
 			+ "FROM Person p, Customer c, BusinessCustomer bc, Discount d, Address a, AddressCity ac\r\n"
 			+ "WHERE p.Phone = ?\r\n"
 			+ "and p.Phone = c.Phone\r\n"
@@ -30,7 +30,7 @@ public class PersonDB implements PersonDBIF {
 			+ "and d.ID = bc.DiscountID\r\n"
 			+ "and p.AddressID = a.ID\r\n"
 			+ "and a.Zipcode = ac.Zipcode");
-	private PreparedStatement findBusinessCustomerByPhone;
+	private PreparedStatement findBusinessCustomerOnPhone;
 	
 	/**
 	 * Constructor to initialize instance variables.
@@ -47,8 +47,8 @@ public class PersonDB implements PersonDBIF {
 	private void init() throws DataAccessException {
 		Connection con = DBConnection.getInstance().getConnection();
 		try {
-			findPrivateCustomerByPhone = con.prepareStatement(FIND_PRIVATE_CUSTOMER_BY_PHONE);
-			findBusinessCustomerByPhone = con.prepareStatement(FIND_BUSINESS_CUSTOMER_BY_PHONE);
+			findPrivateCustomerOnPhone = con.prepareStatement(FIND_PRIVATE_CUSTOMER_ON_PHONE);
+			findBusinessCustomerOnPhone = con.prepareStatement(FIND_BUSINESS_CUSTOMER_ON_PHONE);
 		} catch(SQLException e) {
 			throw new DataAccessException("Could not prepare statement", e);
 		}
@@ -62,10 +62,10 @@ public class PersonDB implements PersonDBIF {
 	public Customer findCustomerByPhone(String phone) throws DataAccessException {
 		Customer customer = new Customer();
 		try {
-			findPrivateCustomerByPhone.setString(1, phone);
-			ResultSet rs = findPrivateCustomerByPhone.executeQuery();
-			findBusinessCustomerByPhone.setString(1, phone);
-			ResultSet rs1 = findBusinessCustomerByPhone.executeQuery();
+			findPrivateCustomerOnPhone.setString(1, phone);
+			ResultSet rs = findPrivateCustomerOnPhone.executeQuery();
+			findBusinessCustomerOnPhone.setString(1, phone);
+			ResultSet rs1 = findBusinessCustomerOnPhone.executeQuery();
 			if(rs.next() && rs.getString("CustomerType").equals("PrivateCustomer")) {
 				customer = buildPrivateCustomerObject(rs);
 			}

@@ -36,13 +36,6 @@ public class Customer extends Person {
 		super(null, null, null, 0, null, null, null);
 	}
 
-	/**
-	 * Gets customerType.
-	 * @return Customer
-	 */
-	public Customer getCustomerType() {
-		return customerType;
-	}
 
 	/**
 	 * Sets new customerType.

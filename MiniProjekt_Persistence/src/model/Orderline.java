@@ -50,13 +50,6 @@ public class Orderline {
 		this.quantity = quantity;
 	}
 	
-	/**
-	 * Gets saleOrder.
-	 * @return SaleOrder
-	 */
-	public SaleOrder getSaleOrder() {
-		return saleOrder;
-	}
 	
 	/**
 	 * Sets new saleOrder.

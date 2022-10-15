@@ -34,13 +34,6 @@ public class BuyProduct extends Product {
 		super(0, null, 0, null, 0, 0, 0, null, null);
 	}
 	
-	/**
-	 * Gets amount.
-	 * @return amount
-	 */
-	public int getAmount() {
-		return amount;
-	}
 	
 	/**
 	 * Sets new amount.

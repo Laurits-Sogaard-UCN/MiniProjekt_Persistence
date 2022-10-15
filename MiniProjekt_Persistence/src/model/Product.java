@@ -73,13 +73,6 @@ public class Product {
 		this.name = name;
 	}
 
-	/**
-	 * Gets purchasePrice.
-	 * @return double
-	 */
-	public double getPurchasePrice() {
-		return purchasePrice;
-	}
 
 	/**
 	 * Sets new purchasePrice.
@@ -105,13 +98,6 @@ public class Product {
 		this.countryOfOrigin = countryOfOrigin;
 	}
 
-	/**
-	 * Gets minStock.
-	 * @return int
-	 */
-	public int getMinStock() {
-		return minStock;
-	}
 
 	/**
 	 * Sets new minStock.
@@ -121,13 +107,6 @@ public class Product {
 		this.minStock = minStock;
 	}
 
-	/**
-	 * Gets currentStock.
-	 * @return int
-	 */
-	public int getCurrentStock() {
-		return currentStock;
-	}
 
 	/**
 	 * Sets new currentStock.
@@ -153,13 +132,6 @@ public class Product {
 		this.salesPrice = salesPrice;
 	}
 	
-	/**
-	 * Gets productType.
-	 * @return Product
-	 */
-	public Product getProductType() {
-		return productType;
-	}
 
 	/**
 	 * Sets new productType.

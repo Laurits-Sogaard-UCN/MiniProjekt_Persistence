@@ -63,14 +63,6 @@ public class Supplier {
 	}
 
 	/**
-	 * Gets name.
-	 * @return String
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
 	 * Sets new name.
 	 * @param name
 	 */
@@ -78,13 +70,6 @@ public class Supplier {
 		this.name = name;
 	}
 
-	/**
-	 * Gets address.
-	 * @return String
-	 */
-	public String getAddress() {
-		return address;
-	}
 
 	/**
 	 * Sets new address.
@@ -94,13 +79,6 @@ public class Supplier {
 		this.address = address;
 	}
 
-	/**
-	 * Gets zipcode.
-	 * @return int
-	 */
-	public int getZipcode() {
-		return zipcode;
-	}
 
 	/**
 	 * Sets new zipcode.
@@ -110,13 +88,6 @@ public class Supplier {
 		this.zipcode = zipcode;
 	}
 
-	/**
-	 * Gets city.
-	 * @return String
-	 */
-	public String getCity() {
-		return city;
-	}
 
 	/**
 	 * Sets new city.
@@ -126,13 +97,6 @@ public class Supplier {
 		this.city = city;
 	}
 
-	/**
-	 * Gets country.
-	 * @return String
-	 */
-	public String getCountry() {
-		return country;
-	}
 
 	/**
 	 * Sets new country.
@@ -142,13 +106,6 @@ public class Supplier {
 		this.country = country;
 	}
 
-	/**
-	 * Gets email.
-	 * @return String
-	 */
-	public String getEmail() {
-		return email;
-	}
 
 	/**
 	 * Sets new email.

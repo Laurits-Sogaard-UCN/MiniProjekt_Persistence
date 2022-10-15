@@ -38,13 +38,6 @@ public class Clothing extends BuyProduct {
 		super(0, null, 0, null, 0, 0, 0, null, null, 0, null);
 	}
 
-	/**
-	 * Gets size.
-	 * @return int
-	 */
-	public int getSize() {
-		return size;
-	}
 
 	/**
 	 * Sets new size.
@@ -54,13 +47,6 @@ public class Clothing extends BuyProduct {
 		this.size = size;
 	}
 
-	/**
-	 * Gets colour.
-	 * @return String
-	 */
-	public String getColour() {
-		return colour;
-	}
 
 	/**
 	 * Sets new colour.
