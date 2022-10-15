@@ -24,7 +24,6 @@ public class SaleOrder {
 	 */
 	public SaleOrder(LocalDate date, String deliveryStatus, LocalDate deliveryDate, Customer customer,
 			Employee employee) {
-		super();
 		this.date = date;
 		this.total = 0;
 		this.deliveryStatus = deliveryStatus;
