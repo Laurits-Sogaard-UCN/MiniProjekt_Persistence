@@ -5,8 +5,9 @@ public class Clothing extends BuyProduct {
 	private int size;
 	private String colour;
 	
+	
+	
 	/**
-	 * Constructor to initialize instance variables.
 	 * @param barcode
 	 * @param name
 	 * @param purchasePrice
@@ -16,20 +17,20 @@ public class Clothing extends BuyProduct {
 	 * @param salesPrice
 	 * @param productType
 	 * @param supplier
-	 * @param size
+	 * @param amount
 	 * @param buyProductType
-	 * @param size2
+	 * @param size
 	 * @param colour
 	 */
 	public Clothing(int barcode, String name, double purchasePrice, String countryOfOrigin, int minStock,
-			int currentStock, double salesPrice, Product productType, Supplier supplier, int size,
-			BuyProduct buyProductType, int size2, String colour) {
+			int currentStock, double salesPrice, Product productType, Supplier supplier, int amount,
+			BuyProduct buyProductType, int size, String colour) {
 		super(barcode, name, purchasePrice, countryOfOrigin, minStock, currentStock, salesPrice, productType, supplier,
-				size, buyProductType);
-		size = size2;
+				amount, buyProductType);
+		this.size = size;
 		this.colour = colour;
 	}
-	
+
 	/**
 	 * Constructor.
 	 */

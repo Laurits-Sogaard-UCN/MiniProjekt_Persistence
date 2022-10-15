@@ -38,6 +38,9 @@ public class Product {
 		this.supplier = supplier;
 	}
 
+	public Product() {
+	}
+
 	/**
 	 * Gets barcode.
 	 * @return int

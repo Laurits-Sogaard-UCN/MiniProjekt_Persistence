@@ -98,7 +98,7 @@ public class ProductDB implements ProductDBIF {
 		BuyProduct buyProduct = null;
 		try {
 			if(rs.getString("BuyProductType").equals("Clothing")) {
-				buyProduct = (BuyProduct) new Clothing();
+				buyProduct = new Clothing();
 				buyProduct = buildClothingObject(rs);
 			}
 			else if(rs.getString("BuyProductType").equals("Equipment")) {
