@@ -2,7 +2,7 @@ package model;
 
 public class PrivateCustomer extends Customer {
 	
-	private int freeShipping;
+	private double freeShipping;
 	
 	/**
 	 * Constructor to initialize instance variables.
@@ -17,7 +17,7 @@ public class PrivateCustomer extends Customer {
 	 * @param freeShipping
 	 */
 	public PrivateCustomer(String fname, String lname, String address, int zipcode, String city, String phone,
-			String email, Customer customerType, int freeShipping) {
+			String email, Customer customerType, double freeShipping) {
 		super(fname, lname, address, zipcode, city, phone, email, customerType);
 		this.freeShipping = freeShipping;
 	}
@@ -31,9 +31,9 @@ public class PrivateCustomer extends Customer {
 
 	/**
 	 * Gets freeShipping.
-	 * @return int
+	 * @return double
 	 */
-	public int getFreeShipping() {
+	public double getFreeShipping() {
 		return freeShipping;
 	}
 
@@ -41,7 +41,7 @@ public class PrivateCustomer extends Customer {
 	 * Sets new freeShipping.
 	 * @param freeShipping
 	 */
-	public void setFreeShipping(int freeShipping) {
+	public void setFreeShipping(double freeShipping) {
 		this.freeShipping = freeShipping;
 	}
 

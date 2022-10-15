@@ -12,7 +12,7 @@ import utility.DataAccessException;
 
 public class PersonDB implements PersonDBIF {
 	
-	private static final String FIND_CUSTOMER_BY_PHONE = ("SELECT p.*, c.*, d.Discount, a.*, ac.City\r\n"
+	private static final String FIND_PRIVATE_CUSTOMER_BY_PHONE = ("SELECT p.*, c.*, d.Discount, a.*, ac.City\r\n"
 			+ "FROM Person p, Customer c, PrivateCustomer pc, Discount d, Address a, AddressCity ac\r\n"
 			+ "WHERE p.Phone = ?\r\n"
 			+ "and p.Phone = c.Phone\r\n"
@@ -20,7 +20,17 @@ public class PersonDB implements PersonDBIF {
 			+ "and d.ID = pc.DiscountID\r\n"
 			+ "and p.AddressID = a.ID\r\n"
 			+ "and a.Zipcode = ac.Zipcode");
-	private PreparedStatement findCustomerByPhone;
+	private PreparedStatement findPrivateCustomerByPhone;
+	
+	private static final String FIND_BUSINESS_CUSTOMER_BY_PHONE = ("SELECT p.*, bc.*, c.*, d.Discount, a.*, ac.City\r\n"
+			+ "FROM Person p, Customer c, BusinessCustomer bc, Discount d, Address a, AddressCity ac\r\n"
+			+ "WHERE p.Phone = ?\r\n"
+			+ "and p.Phone = c.Phone\r\n"
+			+ "and c.Phone = bc.Phone\r\n"
+			+ "and d.ID = bc.DiscountID\r\n"
+			+ "and p.AddressID = a.ID\r\n"
+			+ "and a.Zipcode = ac.Zipcode");
+	private PreparedStatement findBusinessCustomerByPhone;
 	
 	/**
 	 * Constructor to initialize instance variables.
@@ -37,7 +47,8 @@ public class PersonDB implements PersonDBIF {
 	private void init() throws DataAccessException {
 		Connection con = DBConnection.getInstance().getConnection();
 		try {
-			findCustomerByPhone = con.prepareStatement(FIND_CUSTOMER_BY_PHONE);
+			findPrivateCustomerByPhone = con.prepareStatement(FIND_PRIVATE_CUSTOMER_BY_PHONE);
+			findBusinessCustomerByPhone = con.prepareStatement(FIND_BUSINESS_CUSTOMER_BY_PHONE);
 		} catch(SQLException e) {
 			throw new DataAccessException("Could not prepare statement", e);
 		}
@@ -51,13 +62,15 @@ public class PersonDB implements PersonDBIF {
 	public Customer findCustomerByPhone(String phone) throws DataAccessException {
 		Customer customer = new Customer();
 		try {
-			findCustomerByPhone.setString(1, phone);
-			ResultSet rs = findCustomerByPhone.executeQuery();
+			findPrivateCustomerByPhone.setString(1, phone);
+			ResultSet rs = findPrivateCustomerByPhone.executeQuery();
+			findBusinessCustomerByPhone.setString(1, phone);
+			ResultSet rs1 = findBusinessCustomerByPhone.executeQuery();
 			if(rs.next() && rs.getString("CustomerType").equals("PrivateCustomer")) {
 				customer = buildPrivateCustomerObject(rs);
 			}
-			else if(rs.next() && rs.getString("CustomerType").equals("BusinessCustomer")) {
-				customer = buildBusinessCustomerObject(rs);
+			else if(rs1.next() && rs1.getString("CustomerType").equals("BusinessCustomer")) {
+				customer = buildBusinessCustomerObject(rs1);
 			}
 		} catch(SQLException e) {
 			throw new DataAccessException("Could not build object", e);
@@ -82,7 +95,7 @@ public class PersonDB implements PersonDBIF {
 			privateCustomer.setEmail(rs.getString("Email"));
 			privateCustomer.setPhone(rs.getString("Phone"));
 			privateCustomer.setCustomerType(privateCustomer);
-			privateCustomer.setFreeShipping(rs.getInt("Discount"));
+			privateCustomer.setFreeShipping(rs.getFloat("Discount"));
 		} catch(SQLException e) {
 			throw new DataAccessException("Could not build object", e);
 		}
@@ -106,7 +119,7 @@ public class PersonDB implements PersonDBIF {
 			businessCustomer.setEmail(rs.getString("Email"));
 			businessCustomer.setPhone(rs.getString("Phone"));
 			businessCustomer.setCustomerType(businessCustomer);
-			businessCustomer.setDiscount(rs.getInt("Discount"));
+			businessCustomer.setDiscount(rs.getFloat("Discount"));
 			businessCustomer.setBusinessName(rs.getString("BusinessName"));
 			businessCustomer.setCVR(rs.getInt("CVR"));
 		} catch(SQLException e) {

@@ -57,11 +57,13 @@ public class SaleOrderController {
 	 */
 	public SaleOrder addProduct(int barcode, int quantity) throws DataAccessException {
 		BuyProduct product = productCtr.findBuyProductOnBarcode(barcode, quantity);
-		Supplier supplier = supplierCtr.findSupplierOnPhone(product.getSupplier().getPhone());
-		product.setSupplier(supplier);
-		Orderline orderline = saleOrder.createOrderline(product, quantity, this.saleOrder);
-		this.saleOrder.addOrderline(orderline);
-		this.saleOrder.setTotal(calculateTotal());
+		if(product.getBuyProductType() != null) {
+			Supplier supplier = supplierCtr.findSupplierOnPhone(product.getSupplier().getPhone());
+			product.setSupplier(supplier);
+			Orderline orderline = saleOrder.createOrderline(product, quantity, this.saleOrder);
+			this.saleOrder.addOrderline(orderline);
+			this.saleOrder.setTotal(calculateTotal());
+		}
 		return this.saleOrder;
 	}
 	
@@ -86,7 +88,7 @@ public class SaleOrderController {
 	private double calculateTotal() {
 		double total = 0;
 		for(Orderline element : this.saleOrder.getOrderlines()) {
-			this.saleOrder.setTotal(total + element.getBuyProduct().getSalesPrice());
+			this.saleOrder.setTotal(total += (element.getBuyProduct().getSalesPrice() * element.getQuantity()));
 		}
 		if(this.saleOrder.getCustomer() instanceof PrivateCustomer && this.saleOrder.getTotal() >= 2500) {
 			PrivateCustomer customer = (PrivateCustomer) this.saleOrder.getCustomer();
@@ -94,7 +96,7 @@ public class SaleOrderController {
 		}
 		if(this.saleOrder.getCustomer() instanceof BusinessCustomer && this.saleOrder.getTotal() >= 1500) {
 			BusinessCustomer customer = (BusinessCustomer) this.saleOrder.getCustomer();
-			this.saleOrder.setTotal(total - (total*(customer.getDiscount()/100)));
+			this.saleOrder.setTotal(total - ((customer.getDiscount()/100) * total));
 		}
 		return this.saleOrder.getTotal();
 	}

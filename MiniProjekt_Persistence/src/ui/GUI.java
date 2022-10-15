@@ -298,7 +298,7 @@ public class GUI extends JFrame {
 		gbl_panel_13.rowWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
 		panel_13.setLayout(gbl_panel_13);
 		
-		JLabel lblPrice = new JLabel("Product price:");
+		JLabel lblPrice = new JLabel("Price:");
 		lblPrice.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GridBagConstraints gbc_lblPrice = new GridBagConstraints();
 		gbc_lblPrice.anchor = GridBagConstraints.WEST;
@@ -621,13 +621,14 @@ public class GUI extends JFrame {
 		String quantityInput = textFieldQuantity.getText();
 		int quantity = Integer.parseInt(quantityInput);
 		SaleOrder saleOrder = saleOrderCtr.addProduct(barcode, quantity);
+
 		textAreaProductsInfo.setText("");
 		textAreaPrice.setText("");
 		textAreaTotal.setText("");
 		for(Orderline element : saleOrder.getOrderlines()) {
-			textAreaProductsInfo.append("Name: " + element.getBuyProduct().getName());
+			textAreaProductsInfo.append(element.getQuantity() + "x " + "Name: " + element.getBuyProduct().getName());
 			textAreaProductsInfo.append(" \n");
-			textAreaPrice.append("Price: " + element.getBuyProduct().getSalesPrice());
+			textAreaPrice.append("Price: " + element.getBuyProduct().getSalesPrice() * element.getQuantity());
 			textAreaPrice.append(" \n");
 		}
 		textAreaTotal.setText("Total: " + saleOrder.getTotal());

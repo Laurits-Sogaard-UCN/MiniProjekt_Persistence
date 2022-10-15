@@ -4,7 +4,7 @@ public class BusinessCustomer extends Customer {
 
 	private String businessName;
 	private int CVR;
-	private int discount;
+	private double discount;
 	
 	/**
 	 * Constructor to initialize instance variables.
@@ -17,14 +17,14 @@ public class BusinessCustomer extends Customer {
 	 * @param email
 	 * @param customerType
 	 * @param businessName
-	 * @param cVR
+	 * @param CVR
 	 * @param discount
 	 */
 	public BusinessCustomer(String fname, String lname, String address, int zipcode, String city, String phone,
-			String email, Customer customerType, String businessName, int cVR, int discount) {
+			String email, Customer customerType, String businessName, int CVR, double discount) {
 		super(fname, lname, address, zipcode, city, phone, email, customerType);
 		this.businessName = businessName;
-		CVR = cVR;
+		this.CVR = CVR;
 		this.discount = discount;
 	}
 
@@ -69,9 +69,9 @@ public class BusinessCustomer extends Customer {
 
 	/**
 	 * Gets discount.
-	 * @return int
+	 * @return double
 	 */
-	public int getDiscount() {
+	public double getDiscount() {
 		return discount;
 	}
 
@@ -79,7 +79,7 @@ public class BusinessCustomer extends Customer {
 	 * Sets new discount.
 	 * @param discount
 	 */
-	public void setDiscount(int discount) {
+	public void setDiscount(double discount) {
 		this.discount = discount;
 	}
 	
