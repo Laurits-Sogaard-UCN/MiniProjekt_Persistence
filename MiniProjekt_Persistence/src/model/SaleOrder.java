@@ -164,6 +164,26 @@ public class SaleOrder {
 		return orderlines;
 	}
 	
+	/**
+	 * Calculates total on SaleOrder object.
+	 * @return double
+	 */
+	public double calculateTotal() {
+		double total = 0;
+		for(Orderline element : orderlines) {
+			setTotal(total += (element.getBuyProduct().getSalesPrice() * element.getQuantity()));
+		}
+		if(getCustomer() instanceof PrivateCustomer && getTotal() >= 2500) {
+			PrivateCustomer customer = (PrivateCustomer) getCustomer();
+			setTotal(total - customer.getFreeShipping());
+		}
+		if(getCustomer() instanceof BusinessCustomer && getTotal() >= 1500) {
+			BusinessCustomer customer = (BusinessCustomer) getCustomer();
+			setTotal(total - ((customer.getDiscount()/100) * total));
+		}
+		return getTotal();
+	}
+	
 	
 	
 

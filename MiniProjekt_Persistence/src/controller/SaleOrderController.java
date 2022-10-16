@@ -62,7 +62,7 @@ public class SaleOrderController {
 			product.setSupplier(supplier);
 			Orderline orderline = saleOrder.createOrderline(product, quantity, this.saleOrder);
 			this.saleOrder.addOrderline(orderline);
-			this.saleOrder.setTotal(calculateTotal());
+			this.saleOrder.setTotal(this.saleOrder.calculateTotal());
 		}
 		return this.saleOrder;
 	}
@@ -81,25 +81,7 @@ public class SaleOrderController {
 		return completed;
 	}
 	
-	/**
-	 * Calculates total on SaleOrder object.
-	 * @return double
-	 */
-	private double calculateTotal() {
-		double total = 0;
-		for(Orderline element : this.saleOrder.getOrderlines()) {
-			this.saleOrder.setTotal(total += (element.getBuyProduct().getSalesPrice() * element.getQuantity()));
-		}
-		if(this.saleOrder.getCustomer() instanceof PrivateCustomer && this.saleOrder.getTotal() >= 2500) {
-			PrivateCustomer customer = (PrivateCustomer) this.saleOrder.getCustomer();
-			this.saleOrder.setTotal(total - customer.getFreeShipping());
-		}
-		if(this.saleOrder.getCustomer() instanceof BusinessCustomer && this.saleOrder.getTotal() >= 1500) {
-			BusinessCustomer customer = (BusinessCustomer) this.saleOrder.getCustomer();
-			this.saleOrder.setTotal(total - ((customer.getDiscount()/100) * total));
-		}
-		return this.saleOrder.getTotal();
-	}
+	
 	
 	/**
 	 * Gets SaleOrder instance variable.
