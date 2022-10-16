@@ -49,14 +49,6 @@ public class SaleOrder {
 	}
 	
 	/**
-	 * Sets new date.
-	 * @param date
-	 */
-	public void setDate(LocalDate date) {
-		this.date = date;
-	}
-	
-	/**
 	 * Gets total.
 	 * @return double
 	 */
@@ -80,13 +72,6 @@ public class SaleOrder {
 		return deliveryStatus;
 	}
 	
-	/**
-	 * Sets new deliveryStatus.
-	 * @param deliveryStatus
-	 */
-	public void setDeliveryStatus(String deliveryStatus) {
-		this.deliveryStatus = deliveryStatus;
-	}
 	
 	/**
 	 * Gets deliveryDate.
@@ -96,13 +81,6 @@ public class SaleOrder {
 		return deliveryDate;
 	}
 	
-	/**
-	 * Sets new deliveryDate.
-	 * @param deliveryDate
-	 */
-	public void setDeliveryDate(LocalDate deliveryDate) {
-		this.deliveryDate = deliveryDate;
-	}
 	
 	/**
 	 * Gets customer.

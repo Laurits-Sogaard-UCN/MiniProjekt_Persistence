@@ -51,13 +51,7 @@ public class SaleOrderDB implements SaleOrderDBIF {
 	 */
 	@Override
 	public SaleOrder createSaleOrder() {
-		SaleOrder saleOrder = new SaleOrder();
-		saleOrder.setDate(LocalDate.now());
-		saleOrder.setDeliveryStatus("In progress");
-		saleOrder.setDeliveryDate(null);
-		saleOrder.setTotal(0);
-		saleOrder.setCustomer(null);
-		saleOrder.setEmployee(null);
+		SaleOrder saleOrder = new SaleOrder(LocalDate.now(), "In progress", null, null, null);
 		return saleOrder;
 	}
 	
