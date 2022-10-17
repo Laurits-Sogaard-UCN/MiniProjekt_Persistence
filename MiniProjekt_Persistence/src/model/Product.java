@@ -72,7 +72,14 @@ public class Product {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 
+	/**
+	 * @return the purchasePrice
+	 */
+	public double getPurchasePrice() {
+		return purchasePrice;
+	}
 
 	/**
 	 * Sets new purchasePrice.
@@ -81,6 +88,7 @@ public class Product {
 	public void setPurchasePrice(double purchasePrice) {
 		this.purchasePrice = purchasePrice;
 	}
+	
 
 	/**
 	 * Gets countryOfOrigin.
@@ -96,6 +104,16 @@ public class Product {
 	 */
 	public void setCountryOfOrigin(String countryOfOrigin) {
 		this.countryOfOrigin = countryOfOrigin;
+	}
+	
+	
+
+
+	/**
+	 * @return the minStock
+	 */
+	public int getMinStock() {
+		return minStock;
 	}
 
 

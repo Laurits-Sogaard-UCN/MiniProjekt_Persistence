@@ -34,7 +34,11 @@ class TestUnit {
 		// Assert
 		assertNotNull(buyProduct);
 		assertNotNull(buyProduct.getBuyProductType());
+		assertEquals("Hat", buyProduct.getName());
+		assertEquals(10, buyProduct.getPurchasePrice());
 		assertEquals("Denmark", buyProduct.getCountryOfOrigin());
+		assertEquals(10, buyProduct.getMinStock());
+		assertEquals(2501, buyProduct.getSalesPrice());
 	} 
 	
 	@Test
