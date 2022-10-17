@@ -148,8 +148,16 @@ public class SaleOrder {
 	 */
 	public double calculateTotal() {
 		double total = 0;
+		ArrayList<Orderline> orderlines1 = new ArrayList<>();
 		for(Orderline element : orderlines) {
-			setTotal(total += (element.getBuyProduct().getSalesPrice() * element.getQuantity()));
+			if(!orderlines1.contains(element)) {
+				setTotal(total += (element.getBuyProduct().getSalesPrice() * element.getQuantity()));
+				orderlines1.add(element);
+			}
+		}
+		if(getCustomer() instanceof PrivateCustomer && getTotal() < 2500) {
+			PrivateCustomer customer = (PrivateCustomer) getCustomer();
+			setTotal(total + customer.getFreeShipping());
 		}
 		if(getCustomer() instanceof PrivateCustomer && getTotal() >= 2500) {
 			PrivateCustomer customer = (PrivateCustomer) getCustomer();
