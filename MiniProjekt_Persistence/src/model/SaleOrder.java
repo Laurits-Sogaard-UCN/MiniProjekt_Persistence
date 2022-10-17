@@ -155,13 +155,13 @@ public class SaleOrder {
 				orderlines1.add(element);
 			}
 		}
-		if(getCustomer() instanceof PrivateCustomer && getTotal() < 2500) {
-			PrivateCustomer customer = (PrivateCustomer) getCustomer();
-			setTotal(total + customer.getFreeShipping());
-		}
 		if(getCustomer() instanceof PrivateCustomer && getTotal() >= 2500) {
 			PrivateCustomer customer = (PrivateCustomer) getCustomer();
 			setTotal(total - customer.getFreeShipping());
+		}
+		else if(getCustomer() instanceof PrivateCustomer && getTotal() < 2500) {
+			PrivateCustomer customer = (PrivateCustomer) getCustomer();
+			setTotal(total + customer.getFreeShipping());
 		}
 		if(getCustomer() instanceof BusinessCustomer && getTotal() >= 1500) {
 			BusinessCustomer customer = (BusinessCustomer) getCustomer();
