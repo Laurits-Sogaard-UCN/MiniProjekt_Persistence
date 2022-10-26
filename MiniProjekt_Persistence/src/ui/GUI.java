@@ -135,7 +135,7 @@ public class GUI extends JFrame {
 		JLabel lblCustomerPhone = new JLabel("Phone:");
 		lblCustomerPhone.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GridBagConstraints gbc_lblCustomerPhone = new GridBagConstraints();
-		gbc_lblCustomerPhone.anchor = GridBagConstraints.WEST;
+		gbc_lblCustomerPhone.fill = GridBagConstraints.BOTH;
 		gbc_lblCustomerPhone.insets = new Insets(0, 0, 5, 0);
 		gbc_lblCustomerPhone.gridx = 0;
 		gbc_lblCustomerPhone.gridy = 0;
@@ -144,7 +144,7 @@ public class GUI extends JFrame {
 		textFieldPhone = new JTextField();
 		GridBagConstraints gbc_textFieldPhone = new GridBagConstraints();
 		gbc_textFieldPhone.insets = new Insets(0, 0, 5, 0);
-		gbc_textFieldPhone.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldPhone.fill = GridBagConstraints.BOTH;
 		gbc_textFieldPhone.gridx = 0;
 		gbc_textFieldPhone.gridy = 1;
 		panel_6.add(textFieldPhone, gbc_textFieldPhone);
@@ -166,7 +166,7 @@ public class GUI extends JFrame {
 			}
 		});
 		GridBagConstraints gbc_btnCreateSaleOrder = new GridBagConstraints();
-		gbc_btnCreateSaleOrder.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnCreateSaleOrder.fill = GridBagConstraints.BOTH;
 		gbc_btnCreateSaleOrder.gridx = 0;
 		gbc_btnCreateSaleOrder.gridy = 3;
 		panel_6.add(btnCreateSaleOrder, gbc_btnCreateSaleOrder);
